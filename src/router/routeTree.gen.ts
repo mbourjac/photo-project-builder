@@ -11,32 +11,77 @@
 // Import Routes
 
 import { Route as rootRoute } from './../routes/__root'
-import { Route as IndexImport } from './../routes/index'
+import { Route as PublicImport } from './../routes/_public'
+import { Route as PublicIndexImport } from './../routes/_public/index'
+import { Route as PublicRegisterImport } from './../routes/_public/register'
+import { Route as PublicLoginImport } from './../routes/_public/login'
 
 // Create/Update Routes
 
-const IndexRoute = IndexImport.update({
-  path: '/',
+const PublicRoute = PublicImport.update({
+  id: '/_public',
   getParentRoute: () => rootRoute,
+} as any)
+
+const PublicIndexRoute = PublicIndexImport.update({
+  path: '/',
+  getParentRoute: () => PublicRoute,
+} as any)
+
+const PublicRegisterRoute = PublicRegisterImport.update({
+  path: '/register',
+  getParentRoute: () => PublicRoute,
+} as any)
+
+const PublicLoginRoute = PublicLoginImport.update({
+  path: '/login',
+  getParentRoute: () => PublicRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_public': {
+      id: '/_public'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof PublicImport
+      parentRoute: typeof rootRoute
+    }
+    '/_public/login': {
+      id: '/_public/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof PublicLoginImport
+      parentRoute: typeof PublicImport
+    }
+    '/_public/register': {
+      id: '/_public/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof PublicRegisterImport
+      parentRoute: typeof PublicImport
+    }
+    '/_public/': {
+      id: '/_public/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof PublicIndexImport
+      parentRoute: typeof PublicImport
     }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({ IndexRoute })
+export const routeTree = rootRoute.addChildren({
+  PublicRoute: PublicRoute.addChildren({
+    PublicLoginRoute,
+    PublicRegisterRoute,
+    PublicIndexRoute,
+  }),
+})
 
 /* prettier-ignore-end */
 
@@ -46,11 +91,28 @@ export const routeTree = rootRoute.addChildren({ IndexRoute })
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/_public"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
+    "/_public": {
+      "filePath": "_public.tsx",
+      "children": [
+        "/_public/login",
+        "/_public/register",
+        "/_public/"
+      ]
+    },
+    "/_public/login": {
+      "filePath": "_public/login.tsx",
+      "parent": "/_public"
+    },
+    "/_public/register": {
+      "filePath": "_public/register.tsx",
+      "parent": "/_public"
+    },
+    "/_public/": {
+      "filePath": "_public/index.tsx",
+      "parent": "/_public"
     }
   }
 }
