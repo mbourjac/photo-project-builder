@@ -27,7 +27,7 @@ export const PublicLayout = () => {
           </ul>
         </nav>
       </header>
-      <main className="flex grow flex-col px-8">
+      <main className="flex grow flex-col px-8 py-4">
         <Outlet />
       </main>
     </div>
