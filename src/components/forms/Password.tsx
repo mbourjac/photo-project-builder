@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type HTMLInputAutoCompleteAttribute } from 'react';
 import type { FieldValues } from 'react-hook-form';
 import { type BaseFieldProps, useBaseField } from '../../hooks/use-base-field';
 import { Icon } from '../ui/Icon';
@@ -9,10 +9,11 @@ export type PasswordProps<T extends FieldValues> = Omit<
   'type'
 > & {
   label: string;
+  autoComplete?: HTMLInputAutoCompleteAttribute;
 };
 
 export const Password = <T extends FieldValues>(props: PasswordProps<T>) => {
-  const { id, label } = props;
+  const { id, label, autoComplete } = props;
   const { attributes, errorMessage } = useBaseField({
     ...props,
   });
@@ -29,6 +30,7 @@ export const Password = <T extends FieldValues>(props: PasswordProps<T>) => {
       <div className="relative">
         <input
           {...attributes}
+          autoComplete={autoComplete}
           className="w-full rounded-full border px-3 py-1"
           type={isPasswordVisible ? 'text' : 'password'}
         />

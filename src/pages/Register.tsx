@@ -49,11 +49,23 @@ export const Register = () => {
           className="flex flex-col gap-12"
         >
           <div className="flex flex-col gap-12">
-            <Input type="email" id="email" label="Email*" {...inputProps} />
-            <Password id="password" label="Password*" {...inputProps} />
+            <Input
+              type="email"
+              id="email"
+              label="Email*"
+              autoComplete="email"
+              {...inputProps}
+            />
+            <Password
+              id="password"
+              label="Password*"
+              autoComplete="new-password"
+              {...inputProps}
+            />
             <Password
               id="confirmPassword"
               label="Confirm password*"
+              autoComplete="new-password"
               {...inputProps}
             />
           </div>
