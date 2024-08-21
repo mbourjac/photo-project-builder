@@ -1,5 +1,9 @@
 import { z } from 'zod';
 
+export const authSchema = z.object({
+  accessToken: z.string(),
+});
+
 export const registerUserSchema = z
   .object({
     email: z

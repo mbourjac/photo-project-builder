@@ -12,14 +12,21 @@
 
 import { Route as rootRoute } from './../routes/__root'
 import { Route as PublicImport } from './../routes/_public'
+import { Route as ProtectedImport } from './../routes/_protected'
 import { Route as PublicIndexImport } from './../routes/_public/index'
 import { Route as PublicRegisterImport } from './../routes/_public/register'
 import { Route as PublicLoginImport } from './../routes/_public/login'
+import { Route as ProtectedDashboardImport } from './../routes/_protected/dashboard'
 
 // Create/Update Routes
 
 const PublicRoute = PublicImport.update({
   id: '/_public',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProtectedRoute = ProtectedImport.update({
+  id: '/_protected',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -38,16 +45,35 @@ const PublicLoginRoute = PublicLoginImport.update({
   getParentRoute: () => PublicRoute,
 } as any)
 
+const ProtectedDashboardRoute = ProtectedDashboardImport.update({
+  path: '/dashboard',
+  getParentRoute: () => ProtectedRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_protected': {
+      id: '/_protected'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof ProtectedImport
+      parentRoute: typeof rootRoute
+    }
     '/_public': {
       id: '/_public'
       path: ''
       fullPath: ''
       preLoaderRoute: typeof PublicImport
       parentRoute: typeof rootRoute
+    }
+    '/_protected/dashboard': {
+      id: '/_protected/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof ProtectedDashboardImport
+      parentRoute: typeof ProtectedImport
     }
     '/_public/login': {
       id: '/_public/login'
@@ -76,6 +102,7 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren({
+  ProtectedRoute: ProtectedRoute.addChildren({ ProtectedDashboardRoute }),
   PublicRoute: PublicRoute.addChildren({
     PublicLoginRoute,
     PublicRegisterRoute,
@@ -91,7 +118,14 @@ export const routeTree = rootRoute.addChildren({
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
+        "/_protected",
         "/_public"
+      ]
+    },
+    "/_protected": {
+      "filePath": "_protected.tsx",
+      "children": [
+        "/_protected/dashboard"
       ]
     },
     "/_public": {
@@ -101,6 +135,10 @@ export const routeTree = rootRoute.addChildren({
         "/_public/register",
         "/_public/"
       ]
+    },
+    "/_protected/dashboard": {
+      "filePath": "_protected/dashboard.tsx",
+      "parent": "/_protected"
     },
     "/_public/login": {
       "filePath": "_public/login.tsx",

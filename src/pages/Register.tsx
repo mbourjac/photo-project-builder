@@ -1,11 +1,17 @@
+import { useEffect } from 'react';
+import { useNavigate, useRouter } from '@tanstack/react-router';
 import { Input } from '../components/forms/Input';
 import { Password } from '../components/forms/Password';
 import { Button } from '../components/ui/Button';
 import { useZodForm } from '../hooks/use-zod-form';
 import { registerUserSchema } from '../services/auth/auth.schemas';
+import { useAuthService } from '../services/auth/auth.service';
 import type { RegisterUser } from '../services/auth/auth.types';
 
 export const Register = () => {
+  const router = useRouter();
+  const navigate = useNavigate();
+  const { auth, registerMutation } = useAuthService();
   const {
     handleSubmit,
     formState: { isSubmitting },
@@ -19,10 +25,17 @@ export const Register = () => {
     },
   });
 
-  const onSubmit = (data: RegisterUser) => {
-    console.log(data);
+  const onSubmit = async (data: RegisterUser) => {
+    registerMutation.mutate(data);
+    await router.invalidate();
     resetForm();
   };
+
+  useEffect(() => {
+    if (auth) {
+      void navigate({ to: '/dashboard' });
+    }
+  }, [auth, navigate]);
 
   return (
     <div className="flex grow items-center justify-center overflow-auto">
