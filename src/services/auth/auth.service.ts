@@ -24,5 +24,9 @@ export const useAuthService = () => {
     },
   });
 
-  return { auth, registerMutation };
+  const logout = () => {
+    setAuth(null);
+  };
+
+  return { auth, registerMutation, logout };
 };

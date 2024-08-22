@@ -1,8 +1,16 @@
-import { Link, Outlet } from '@tanstack/react-router';
+import { Link, Outlet, useNavigate, useRouter } from '@tanstack/react-router';
 import { useAuthService } from '../services/auth/auth.service';
 
 export const AppLayout = () => {
-  const { auth } = useAuthService();
+  const router = useRouter();
+  const navigate = useNavigate();
+  const { auth, logout } = useAuthService();
+
+  const handleLogout = async () => {
+    logout();
+    await router.invalidate();
+    await navigate({ to: '/' });
+  };
 
   return (
     <div className="flex min-h-dvh flex-col">
@@ -22,6 +30,7 @@ export const AppLayout = () => {
         {auth ?
           <div className="flex gap-8">
             <Link to="/dashboard">Dashboard</Link>
+            <button onClick={() => void handleLogout()}>Logout</button>
           </div>
         : <nav>
             <ul className="flex gap-8">
