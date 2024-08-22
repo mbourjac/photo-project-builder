@@ -11,90 +11,90 @@
 // Import Routes
 
 import { Route as rootRoute } from './../routes/__root'
-import { Route as PublicImport } from './../routes/_public'
-import { Route as ProtectedImport } from './../routes/_protected'
-import { Route as PublicIndexImport } from './../routes/_public/index'
-import { Route as PublicRegisterImport } from './../routes/_public/register'
-import { Route as PublicLoginImport } from './../routes/_public/login'
-import { Route as ProtectedDashboardImport } from './../routes/_protected/dashboard'
+import { Route as LayoutImport } from './../routes/_layout'
+import { Route as LayoutIndexImport } from './../routes/_layout/index'
+import { Route as LayoutRegisterImport } from './../routes/_layout/register'
+import { Route as LayoutLoginImport } from './../routes/_layout/login'
+import { Route as LayoutProtectedImport } from './../routes/_layout/_protected'
+import { Route as LayoutProtectedDashboardImport } from './../routes/_layout/_protected/dashboard'
 
 // Create/Update Routes
 
-const PublicRoute = PublicImport.update({
-  id: '/_public',
+const LayoutRoute = LayoutImport.update({
+  id: '/_layout',
   getParentRoute: () => rootRoute,
 } as any)
 
-const ProtectedRoute = ProtectedImport.update({
-  id: '/_protected',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const PublicIndexRoute = PublicIndexImport.update({
+const LayoutIndexRoute = LayoutIndexImport.update({
   path: '/',
-  getParentRoute: () => PublicRoute,
+  getParentRoute: () => LayoutRoute,
 } as any)
 
-const PublicRegisterRoute = PublicRegisterImport.update({
+const LayoutRegisterRoute = LayoutRegisterImport.update({
   path: '/register',
-  getParentRoute: () => PublicRoute,
+  getParentRoute: () => LayoutRoute,
 } as any)
 
-const PublicLoginRoute = PublicLoginImport.update({
+const LayoutLoginRoute = LayoutLoginImport.update({
   path: '/login',
-  getParentRoute: () => PublicRoute,
+  getParentRoute: () => LayoutRoute,
 } as any)
 
-const ProtectedDashboardRoute = ProtectedDashboardImport.update({
+const LayoutProtectedRoute = LayoutProtectedImport.update({
+  id: '/_protected',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutProtectedDashboardRoute = LayoutProtectedDashboardImport.update({
   path: '/dashboard',
-  getParentRoute: () => ProtectedRoute,
+  getParentRoute: () => LayoutProtectedRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_protected': {
-      id: '/_protected'
+    '/_layout': {
+      id: '/_layout'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof ProtectedImport
+      preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
     }
-    '/_public': {
-      id: '/_public'
+    '/_layout/_protected': {
+      id: '/_layout/_protected'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof PublicImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof LayoutProtectedImport
+      parentRoute: typeof LayoutImport
     }
-    '/_protected/dashboard': {
-      id: '/_protected/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof ProtectedDashboardImport
-      parentRoute: typeof ProtectedImport
-    }
-    '/_public/login': {
-      id: '/_public/login'
+    '/_layout/login': {
+      id: '/_layout/login'
       path: '/login'
       fullPath: '/login'
-      preLoaderRoute: typeof PublicLoginImport
-      parentRoute: typeof PublicImport
+      preLoaderRoute: typeof LayoutLoginImport
+      parentRoute: typeof LayoutImport
     }
-    '/_public/register': {
-      id: '/_public/register'
+    '/_layout/register': {
+      id: '/_layout/register'
       path: '/register'
       fullPath: '/register'
-      preLoaderRoute: typeof PublicRegisterImport
-      parentRoute: typeof PublicImport
+      preLoaderRoute: typeof LayoutRegisterImport
+      parentRoute: typeof LayoutImport
     }
-    '/_public/': {
-      id: '/_public/'
+    '/_layout/': {
+      id: '/_layout/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof PublicIndexImport
-      parentRoute: typeof PublicImport
+      preLoaderRoute: typeof LayoutIndexImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/_protected/dashboard': {
+      id: '/_layout/_protected/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof LayoutProtectedDashboardImport
+      parentRoute: typeof LayoutProtectedImport
     }
   }
 }
@@ -102,11 +102,13 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren({
-  ProtectedRoute: ProtectedRoute.addChildren({ ProtectedDashboardRoute }),
-  PublicRoute: PublicRoute.addChildren({
-    PublicLoginRoute,
-    PublicRegisterRoute,
-    PublicIndexRoute,
+  LayoutRoute: LayoutRoute.addChildren({
+    LayoutProtectedRoute: LayoutProtectedRoute.addChildren({
+      LayoutProtectedDashboardRoute,
+    }),
+    LayoutLoginRoute,
+    LayoutRegisterRoute,
+    LayoutIndexRoute,
   }),
 })
 
@@ -118,39 +120,40 @@ export const routeTree = rootRoute.addChildren({
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/_protected",
-        "/_public"
+        "/_layout"
       ]
     },
-    "/_protected": {
-      "filePath": "_protected.tsx",
+    "/_layout": {
+      "filePath": "_layout.tsx",
       "children": [
-        "/_protected/dashboard"
+        "/_layout/_protected",
+        "/_layout/login",
+        "/_layout/register",
+        "/_layout/"
       ]
     },
-    "/_public": {
-      "filePath": "_public.tsx",
+    "/_layout/_protected": {
+      "filePath": "_layout/_protected.tsx",
+      "parent": "/_layout",
       "children": [
-        "/_public/login",
-        "/_public/register",
-        "/_public/"
+        "/_layout/_protected/dashboard"
       ]
     },
-    "/_protected/dashboard": {
-      "filePath": "_protected/dashboard.tsx",
-      "parent": "/_protected"
+    "/_layout/login": {
+      "filePath": "_layout/login.tsx",
+      "parent": "/_layout"
     },
-    "/_public/login": {
-      "filePath": "_public/login.tsx",
-      "parent": "/_public"
+    "/_layout/register": {
+      "filePath": "_layout/register.tsx",
+      "parent": "/_layout"
     },
-    "/_public/register": {
-      "filePath": "_public/register.tsx",
-      "parent": "/_public"
+    "/_layout/": {
+      "filePath": "_layout/index.tsx",
+      "parent": "/_layout"
     },
-    "/_public/": {
-      "filePath": "_public/index.tsx",
-      "parent": "/_public"
+    "/_layout/_protected/dashboard": {
+      "filePath": "_layout/_protected/dashboard.tsx",
+      "parent": "/_layout/_protected"
     }
   }
 }

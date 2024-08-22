@@ -1,6 +1,9 @@
 import { Link, Outlet } from '@tanstack/react-router';
+import { useAuthService } from '../services/auth/auth.service';
 
-export const PublicLayout = () => {
+export const AppLayout = () => {
+  const { auth } = useAuthService();
+
   return (
     <div className="flex min-h-dvh flex-col">
       <header className="flex items-center justify-between px-8 py-4">
@@ -16,16 +19,21 @@ export const PublicLayout = () => {
           </svg>
           <span className="sr-only">Home</span>
         </Link>
-        <nav>
-          <ul className="flex gap-8">
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-          </ul>
-        </nav>
+        {auth ?
+          <div className="flex gap-8">
+            <Link to="/dashboard">Dashboard</Link>
+          </div>
+        : <nav>
+            <ul className="flex gap-8">
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+              <li>
+                <Link to="/register">Register</Link>
+              </li>
+            </ul>
+          </nav>
+        }
       </header>
       <main className="flex grow flex-col px-8 py-4">
         <Outlet />
