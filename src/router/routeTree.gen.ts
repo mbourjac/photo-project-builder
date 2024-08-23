@@ -13,7 +13,7 @@
 import { Route as rootRoute } from './../routes/__root'
 import { Route as LayoutImport } from './../routes/_layout'
 import { Route as LayoutIndexImport } from './../routes/_layout/index'
-import { Route as LayoutRegisterImport } from './../routes/_layout/register'
+import { Route as LayoutSignUpImport } from './../routes/_layout/sign-up'
 import { Route as LayoutLoginImport } from './../routes/_layout/login'
 import { Route as LayoutProtectedImport } from './../routes/_layout/_protected'
 import { Route as LayoutProtectedDashboardImport } from './../routes/_layout/_protected/dashboard'
@@ -30,8 +30,8 @@ const LayoutIndexRoute = LayoutIndexImport.update({
   getParentRoute: () => LayoutRoute,
 } as any)
 
-const LayoutRegisterRoute = LayoutRegisterImport.update({
-  path: '/register',
+const LayoutSignUpRoute = LayoutSignUpImport.update({
+  path: '/sign-up',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -75,11 +75,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutLoginImport
       parentRoute: typeof LayoutImport
     }
-    '/_layout/register': {
-      id: '/_layout/register'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof LayoutRegisterImport
+    '/_layout/sign-up': {
+      id: '/_layout/sign-up'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof LayoutSignUpImport
       parentRoute: typeof LayoutImport
     }
     '/_layout/': {
@@ -107,7 +107,7 @@ export const routeTree = rootRoute.addChildren({
       LayoutProtectedDashboardRoute,
     }),
     LayoutLoginRoute,
-    LayoutRegisterRoute,
+    LayoutSignUpRoute,
     LayoutIndexRoute,
   }),
 })
@@ -128,7 +128,7 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/_layout/_protected",
         "/_layout/login",
-        "/_layout/register",
+        "/_layout/sign-up",
         "/_layout/"
       ]
     },
@@ -143,8 +143,8 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "_layout/login.tsx",
       "parent": "/_layout"
     },
-    "/_layout/register": {
-      "filePath": "_layout/register.tsx",
+    "/_layout/sign-up": {
+      "filePath": "_layout/sign-up.tsx",
       "parent": "/_layout"
     },
     "/_layout/": {

@@ -4,20 +4,20 @@ import { Input } from '../components/forms/Input';
 import { Password } from '../components/forms/Password';
 import { Button } from '../components/ui/Button';
 import { useZodForm } from '../hooks/use-zod-form';
-import { registerUserSchema } from '../services/auth/auth.schemas';
+import { signUpUserSchema } from '../services/auth/auth.schemas';
 import { useAuthService } from '../services/auth/auth.service';
-import type { RegisterUser } from '../services/auth/auth.types';
+import type { SignUpUser } from '../services/auth/auth.types';
 
-export const Register = () => {
+export const SignUp = () => {
   const router = useRouter();
   const navigate = useNavigate();
-  const { auth, registerMutation } = useAuthService();
+  const { auth, signUpMutation } = useAuthService();
   const {
     handleSubmit,
     formState: { isSubmitting },
     reset: resetForm,
     inputProps,
-  } = useZodForm(registerUserSchema, {
+  } = useZodForm(signUpUserSchema, {
     defaultValues: {
       email: '',
       password: '',
@@ -25,8 +25,8 @@ export const Register = () => {
     },
   });
 
-  const onSubmit = async (data: RegisterUser) => {
-    registerMutation.mutate(data);
+  const onSubmit = async (data: SignUpUser) => {
+    signUpMutation.mutate(data);
     await router.invalidate();
     resetForm();
   };
@@ -70,7 +70,7 @@ export const Register = () => {
             />
           </div>
           <Button isDisabled={isSubmitting} className="mx-auto">
-            Register
+            Sign up
           </Button>
         </form>
       </div>

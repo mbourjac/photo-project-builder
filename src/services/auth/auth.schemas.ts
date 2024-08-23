@@ -4,7 +4,7 @@ export const authSchema = z.object({
   accessToken: z.string(),
 });
 
-export const registerUserSchema = z
+export const signUpUserSchema = z
   .object({
     email: z
       .string()

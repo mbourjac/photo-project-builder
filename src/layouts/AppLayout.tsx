@@ -38,7 +38,7 @@ export const AppLayout = () => {
                 <Link to="/login">Login</Link>
               </li>
               <li>
-                <Link to="/register">Register</Link>
+                <Link to="/sign-up">Sign up</Link>
               </li>
             </ul>
           </nav>
