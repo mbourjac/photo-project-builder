@@ -34,3 +34,8 @@ export const registerUserSchema = z
       });
     }
   });
+
+export const loginUserSchema = z.object({
+  email: z.string().trim().min(1, { message: 'Enter your email address' }),
+  password: z.string().trim().min(1, { message: 'Enter your password' }),
+});

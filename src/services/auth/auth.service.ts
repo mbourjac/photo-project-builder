@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { registerRequest } from './auth.api';
+import { loginRequest, registerRequest } from './auth.api';
 import { authSchema } from './auth.schemas';
 import { useAuthStore } from './auth.store';
-import type { RegisterUser } from './auth.types';
+import type { LoginUser, RegisterUser } from './auth.types';
 
 export const useAuthService = () => {
   const queryClient = useQueryClient();
@@ -24,9 +24,24 @@ export const useAuthService = () => {
     },
   });
 
+  const loginMutation = useMutation({
+    mutationKey: ['login', 'user'],
+    mutationFn: async (loginUserData: LoginUser) => {
+      const auth = await loginRequest(loginUserData);
+      return authSchema.parse(auth);
+    },
+    onSuccess: async (auth) => {
+      setAuth(auth);
+      await queryClient.invalidateQueries();
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
+
   const logout = () => {
     setAuth(null);
   };
 
-  return { auth, registerMutation, logout };
+  return { auth, registerMutation, loginMutation, logout };
 };
