@@ -35,7 +35,7 @@ export const signUpUserSchema = z
     }
   });
 
-export const loginUserSchema = z.object({
+export const logInUserSchema = z.object({
   email: z.string().trim().min(1, { message: 'Enter your email address' }),
   password: z.string().trim().min(1, { message: 'Enter your password' }),
 });

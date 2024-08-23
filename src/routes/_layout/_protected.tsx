@@ -8,7 +8,7 @@ export const Route = createFileRoute('/_layout/_protected')({
     if (!auth) {
       // eslint-disable-next-line @typescript-eslint/only-throw-error
       throw redirect({
-        to: '/login',
+        to: '/log-in',
         search: {
           redirect: location.href as DefinedRoute,
         },

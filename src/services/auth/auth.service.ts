@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { loginRequest, signUpRequest } from './auth.api';
+import { logInRequest, signUpRequest } from './auth.api';
 import { authSchema } from './auth.schemas';
 import { useAuthStore } from './auth.store';
-import type { LoginUser, SignUpUser } from './auth.types';
+import type { LogInUser, SignUpUser } from './auth.types';
 
 export const useAuthService = () => {
   const queryClient = useQueryClient();
@@ -24,10 +24,10 @@ export const useAuthService = () => {
     },
   });
 
-  const loginMutation = useMutation({
-    mutationKey: ['login', 'user'],
-    mutationFn: async (loginUserData: LoginUser) => {
-      const auth = await loginRequest(loginUserData);
+  const logInMutation = useMutation({
+    mutationKey: ['log-in', 'user'],
+    mutationFn: async (logInData: LogInUser) => {
+      const auth = await logInRequest(logInData);
       return authSchema.parse(auth);
     },
     onSuccess: async (auth) => {
@@ -43,5 +43,5 @@ export const useAuthService = () => {
     setAuth(null);
   };
 
-  return { auth, signUpMutation, loginMutation, logout };
+  return { auth, signUpMutation, logInMutation, logout };
 };

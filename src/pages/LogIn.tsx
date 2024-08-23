@@ -4,28 +4,28 @@ import { Input } from '../components/forms/Input';
 import { Password } from '../components/forms/Password';
 import { Button } from '../components/ui/Button';
 import { useZodForm } from '../hooks/use-zod-form';
-import { loginUserSchema } from '../services/auth/auth.schemas';
+import { logInUserSchema } from '../services/auth/auth.schemas';
 import { useAuthService } from '../services/auth/auth.service';
-import type { LoginUser } from '../services/auth/auth.types';
+import type { LogInUser } from '../services/auth/auth.types';
 
-export const Login = () => {
+export const LogIn = () => {
   const router = useRouter();
   const navigate = useNavigate();
-  const { auth, loginMutation } = useAuthService();
+  const { auth, logInMutation } = useAuthService();
   const {
     handleSubmit,
     formState: { isSubmitting },
     reset: resetForm,
     inputProps,
-  } = useZodForm(loginUserSchema, {
+  } = useZodForm(logInUserSchema, {
     defaultValues: {
       email: '',
       password: '',
     },
   });
 
-  const onSubmit = async (data: LoginUser) => {
-    loginMutation.mutate(data);
+  const onSubmit = async (data: LogInUser) => {
+    logInMutation.mutate(data);
     await router.invalidate();
     resetForm();
   };

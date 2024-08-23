@@ -1,6 +1,6 @@
 import type { AxiosResponse } from 'axios';
 import { baseAPI } from '../../lib/axios.instance';
-import type { LoginUser, SignUpUser } from './auth.types';
+import type { LogInUser, SignUpUser } from './auth.types';
 
 export const signUpRequest = async (signUpData: SignUpUser) => {
   const { data } = await baseAPI.post<AxiosResponse>(
@@ -10,10 +10,7 @@ export const signUpRequest = async (signUpData: SignUpUser) => {
   return data;
 };
 
-export const loginRequest = async (loginUserPayload: LoginUser) => {
-  const { data } = await baseAPI.post<AxiosResponse>(
-    '/auth/login',
-    loginUserPayload,
-  );
+export const logInRequest = async (logInData: LogInUser) => {
+  const { data } = await baseAPI.post<AxiosResponse>('/auth/log-in', logInData);
   return data;
 };

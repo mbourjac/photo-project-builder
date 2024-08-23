@@ -14,7 +14,7 @@ import { Route as rootRoute } from './../routes/__root'
 import { Route as LayoutImport } from './../routes/_layout'
 import { Route as LayoutIndexImport } from './../routes/_layout/index'
 import { Route as LayoutSignUpImport } from './../routes/_layout/sign-up'
-import { Route as LayoutLoginImport } from './../routes/_layout/login'
+import { Route as LayoutLogInImport } from './../routes/_layout/log-in'
 import { Route as LayoutProtectedImport } from './../routes/_layout/_protected'
 import { Route as LayoutProtectedDashboardImport } from './../routes/_layout/_protected/dashboard'
 
@@ -35,8 +35,8 @@ const LayoutSignUpRoute = LayoutSignUpImport.update({
   getParentRoute: () => LayoutRoute,
 } as any)
 
-const LayoutLoginRoute = LayoutLoginImport.update({
-  path: '/login',
+const LayoutLogInRoute = LayoutLogInImport.update({
+  path: '/log-in',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -68,11 +68,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutProtectedImport
       parentRoute: typeof LayoutImport
     }
-    '/_layout/login': {
-      id: '/_layout/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LayoutLoginImport
+    '/_layout/log-in': {
+      id: '/_layout/log-in'
+      path: '/log-in'
+      fullPath: '/log-in'
+      preLoaderRoute: typeof LayoutLogInImport
       parentRoute: typeof LayoutImport
     }
     '/_layout/sign-up': {
@@ -106,7 +106,7 @@ export const routeTree = rootRoute.addChildren({
     LayoutProtectedRoute: LayoutProtectedRoute.addChildren({
       LayoutProtectedDashboardRoute,
     }),
-    LayoutLoginRoute,
+    LayoutLogInRoute,
     LayoutSignUpRoute,
     LayoutIndexRoute,
   }),
@@ -127,7 +127,7 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "_layout.tsx",
       "children": [
         "/_layout/_protected",
-        "/_layout/login",
+        "/_layout/log-in",
         "/_layout/sign-up",
         "/_layout/"
       ]
@@ -139,8 +139,8 @@ export const routeTree = rootRoute.addChildren({
         "/_layout/_protected/dashboard"
       ]
     },
-    "/_layout/login": {
-      "filePath": "_layout/login.tsx",
+    "/_layout/log-in": {
+      "filePath": "_layout/log-in.tsx",
       "parent": "/_layout"
     },
     "/_layout/sign-up": {

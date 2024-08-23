@@ -35,7 +35,7 @@ export const AppLayout = () => {
         : <nav>
             <ul className="flex gap-8">
               <li>
-                <Link to="/login">Login</Link>
+                <Link to="/log-in">Log in</Link>
               </li>
               <li>
                 <Link to="/sign-up">Sign up</Link>
