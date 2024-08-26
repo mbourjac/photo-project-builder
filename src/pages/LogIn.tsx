@@ -39,10 +39,10 @@ export const LogIn = () => {
   return (
     <div className="flex grow items-center justify-center overflow-auto">
       <div className="flex w-[min(42rem,100%)] flex-col gap-12 rounded-[48px] border px-12 py-16">
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odit ipsam
-          quisquam ullam aspernatur dolore sit repellendus ratione.
-        </p>
+        <div className="flex flex-col gap-2">
+          <h1 className="text-xl font-bold">Welcome back</h1>
+          <p>Log in to your account to continue.</p>
+        </div>
         <form
           onSubmit={(event) => void handleSubmit(onSubmit)(event)}
           className="flex flex-col gap-12"
