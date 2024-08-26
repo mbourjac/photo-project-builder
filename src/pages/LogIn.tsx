@@ -1,8 +1,7 @@
-import { useEffect } from 'react';
-import { useRouter, useNavigate } from '@tanstack/react-router';
+import { useRouter } from '@tanstack/react-router';
+import { AuthForm } from '../components/app/AuthForm';
 import { Input } from '../components/forms/Input';
 import { Password } from '../components/forms/Password';
-import { Button } from '../components/ui/Button';
 import { useZodForm } from '../hooks/use-zod-form';
 import { logInUserSchema } from '../services/auth/auth.schemas';
 import { useAuthService } from '../services/auth/auth.service';
@@ -10,8 +9,7 @@ import type { LogInUser } from '../services/auth/auth.types';
 
 export const LogIn = () => {
   const router = useRouter();
-  const navigate = useNavigate();
-  const { auth, logInMutation } = useAuthService();
+  const { logInMutation } = useAuthService();
   const {
     handleSubmit,
     formState: { isSubmitting },
@@ -30,43 +28,28 @@ export const LogIn = () => {
     resetForm();
   };
 
-  useEffect(() => {
-    if (auth) {
-      void navigate({ to: '/dashboard' });
-    }
-  }, [auth, navigate]);
-
   return (
-    <div className="flex grow items-center justify-center overflow-auto">
-      <div className="flex w-[min(42rem,100%)] flex-col gap-12 rounded-[48px] border px-12 py-16">
-        <div className="flex flex-col gap-2">
-          <h1 className="text-xl font-bold">Welcome back</h1>
-          <p>Log in to your account to continue.</p>
-        </div>
-        <form
-          onSubmit={(event) => void handleSubmit(onSubmit)(event)}
-          className="flex flex-col gap-12"
-        >
-          <div className="flex flex-col gap-12">
-            <Input
-              type="email"
-              id="email"
-              label="Email*"
-              autoComplete="email"
-              {...inputProps}
-            />
-            <Password
-              id="password"
-              label="Password*"
-              autoComplete="current-password"
-              {...inputProps}
-            />
-          </div>
-          <Button isDisabled={isSubmitting} className="mx-auto">
-            Log in
-          </Button>
-        </form>
-      </div>
-    </div>
+    <AuthForm
+      heading="Welcome back"
+      subheading="Log in to your account to continue."
+      submitLabel="Log in"
+      handleSubmit={handleSubmit}
+      onSubmit={onSubmit}
+      isSubmitting={isSubmitting}
+    >
+      <Input
+        type="email"
+        id="email"
+        label="Email*"
+        autoComplete="email"
+        {...inputProps}
+      />
+      <Password
+        id="password"
+        label="Password*"
+        autoComplete="current-password"
+        {...inputProps}
+      />
+    </AuthForm>
   );
 };
