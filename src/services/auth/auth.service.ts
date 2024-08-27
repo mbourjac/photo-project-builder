@@ -1,4 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+import { getErrorMessage } from '../../helpers/errors';
 import { logInRequest, signUpRequest } from './auth.api';
 import { authSchema } from './auth.schemas';
 import { useAuthStore } from './auth.store';
@@ -20,7 +22,7 @@ export const useAuthService = () => {
       await queryClient.invalidateQueries();
     },
     onError: (error) => {
-      console.error(error);
+      toast.error(getErrorMessage(error));
     },
   });
 
@@ -35,7 +37,7 @@ export const useAuthService = () => {
       await queryClient.invalidateQueries();
     },
     onError: (error) => {
-      console.error(error);
+      toast.error(getErrorMessage(error));
     },
   });
 
