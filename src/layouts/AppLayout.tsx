@@ -5,10 +5,10 @@ import { useAuthService } from '../services/auth/auth.service';
 export const AppLayout = () => {
   const router = useRouter();
   const navigate = useNavigate();
-  const { auth, logout } = useAuthService();
+  const { auth, logOut } = useAuthService();
 
-  const handleLogout = async () => {
-    logout();
+  const handleLogOut = async () => {
+    logOut();
     await router.invalidate();
     await navigate({ to: '/' });
   };
@@ -31,14 +31,14 @@ export const AppLayout = () => {
             <span className="sr-only">Home</span>
           </Link>
           <nav>
-            <ul className="flex gap-8">
+            <ul className="flex gap-[3px] rounded-full border p-[3px]">
               {auth ?
                 <>
                   <li>
                     <Link to="/dashboard">Dashboard</Link>
                   </li>
                   <li>
-                    <button onClick={() => void handleLogout()}>Logout</button>
+                    <button onClick={() => void handleLogOut()}>Log out</button>
                   </li>
                 </>
               : <>

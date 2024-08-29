@@ -41,9 +41,9 @@ export const useAuthService = () => {
     },
   });
 
-  const logout = () => {
+  const logOut = () => {
     setAuth(null);
   };
 
-  return { auth, signUpMutation, logInMutation, logout };
+  return { auth, signUpMutation, logInMutation, logOut };
 };
