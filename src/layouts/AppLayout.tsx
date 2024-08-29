@@ -30,22 +30,28 @@ export const AppLayout = () => {
             </svg>
             <span className="sr-only">Home</span>
           </Link>
-          {auth ?
-            <div className="flex gap-8">
-              <Link to="/dashboard">Dashboard</Link>
-              <button onClick={() => void handleLogout()}>Logout</button>
-            </div>
-          : <nav>
-              <ul className="flex gap-8">
-                <li>
-                  <Link to="/log-in">Log in</Link>
-                </li>
-                <li>
-                  <Link to="/sign-up">Sign up</Link>
-                </li>
-              </ul>
-            </nav>
-          }
+          <nav>
+            <ul className="flex gap-8">
+              {auth ?
+                <>
+                  <li>
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li>
+                  <li>
+                    <button onClick={() => void handleLogout()}>Logout</button>
+                  </li>
+                </>
+              : <>
+                  <li>
+                    <Link to="/log-in">Log in</Link>
+                  </li>
+                  <li>
+                    <Link to="/sign-up">Sign up</Link>
+                  </li>
+                </>
+              }
+            </ul>
+          </nav>
         </header>
         <main className="flex grow flex-col px-8 py-4">
           <Outlet />
