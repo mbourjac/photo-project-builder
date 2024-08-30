@@ -18,7 +18,7 @@ export const Button = ({
     <button
       onClick={onClick}
       className={cn(
-        'hover:text-primary disabled:text-primary w-fit rounded-full bg-black px-6 py-2 text-white transition-colors duration-150 disabled:opacity-50',
+        'rounded-full bg-black px-6 py-1.5 text-white transition-colors duration-150 disabled:opacity-50',
         className,
       )}
       disabled={isDisabled}

@@ -10,12 +10,7 @@ import type { LogInUser } from '../services/auth/auth.types';
 export const LogIn = () => {
   const router = useRouter();
   const { logInMutation } = useAuthService();
-  const {
-    handleSubmit,
-    formState: { isSubmitting },
-    reset: resetForm,
-    inputProps,
-  } = useZodForm(logInUserSchema, {
+  const { handleSubmit, inputProps } = useZodForm(logInUserSchema, {
     defaultValues: {
       email: '',
       password: '',
@@ -25,7 +20,6 @@ export const LogIn = () => {
   const onSubmit = async (data: LogInUser) => {
     logInMutation.mutate(data);
     await router.invalidate();
-    resetForm();
   };
 
   return (
@@ -35,7 +29,7 @@ export const LogIn = () => {
       submitLabel="Log in"
       handleSubmit={handleSubmit}
       onSubmit={onSubmit}
-      isSubmitting={isSubmitting}
+      isSubmitting={logInMutation.isPending}
     >
       <Input
         type="email"
