@@ -31,22 +31,42 @@ export const AppLayout = () => {
             <span className="sr-only">Home</span>
           </Link>
           <nav>
-            <ul className="flex gap-[3px] rounded-full border p-[3px]">
+            <ul className="flex gap-[3px] rounded-full border bg-white p-[3px]">
               {auth ?
                 <>
                   <li>
-                    <Link to="/dashboard">Dashboard</Link>
+                    <Link
+                      to="/dashboard"
+                      className="inline-block rounded-full px-6 py-1.5 transition-colors hover:bg-zinc-100 data-[status=active]:bg-zinc-100"
+                    >
+                      Dashboard
+                    </Link>
                   </li>
                   <li>
-                    <button onClick={() => void handleLogOut()}>Log out</button>
+                    <button
+                      onClick={() => void handleLogOut()}
+                      className="inline-block rounded-full px-6 py-1.5 transition-colors hover:bg-zinc-100"
+                    >
+                      Log out
+                    </button>
                   </li>
                 </>
               : <>
                   <li>
-                    <Link to="/log-in">Log in</Link>
+                    <Link
+                      to="/log-in"
+                      className="inline-block rounded-full px-6 py-1.5 transition-colors hover:bg-zinc-100 data-[status=active]:bg-zinc-100"
+                    >
+                      Log in
+                    </Link>
                   </li>
                   <li>
-                    <Link to="/sign-up">Sign up</Link>
+                    <Link
+                      to="/sign-up"
+                      className="inline-block rounded-full px-6 py-1.5 transition-colors hover:bg-zinc-100 data-[status=active]:bg-zinc-100"
+                    >
+                      Sign up
+                    </Link>
                   </li>
                 </>
               }
