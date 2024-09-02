@@ -31,13 +31,13 @@ export const Password = <T extends FieldValues>(props: PasswordProps<T>) => {
         <input
           {...attributes}
           autoComplete={autoComplete}
-          className="w-full rounded-full border px-3 py-1"
+          className="w-full rounded-xl border px-3 py-1"
           type={isPasswordVisible ? 'text' : 'password'}
         />
         <button
           type="button"
           onClick={handleTogglePassword}
-          className="absolute right-0 top-0 flex aspect-square h-full items-center justify-center rounded-full px-3"
+          className="absolute right-0 top-0 flex aspect-square h-full items-center justify-center rounded-xl px-3"
         >
           <Icon
             kind={isPasswordVisible ? 'hidden' : 'visible'}

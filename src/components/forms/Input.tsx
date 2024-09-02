@@ -21,7 +21,7 @@ export const Input = <T extends FieldValues>(props: InputProps<T>) => {
         <input
           {...attributes}
           autoComplete={autoComplete}
-          className="w-full rounded-full border px-3 py-1"
+          className="w-full rounded-xl border px-3 py-1"
         />
       </div>
       {errorMessage && <ErrorMessage message={errorMessage} />}
