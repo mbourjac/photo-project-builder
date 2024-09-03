@@ -48,7 +48,7 @@ export const AuthForm = <T extends FieldValues>({
           className="flex flex-col gap-12"
         >
           <div className="flex flex-col gap-12">{children}</div>
-          <Button isDisabled={isSubmitting} className="mx-auto">
+          <Button disabled={isSubmitting} className="mx-auto">
             {submitLabel}
           </Button>
         </form>
