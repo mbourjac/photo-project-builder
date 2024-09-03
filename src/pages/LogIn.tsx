@@ -2,6 +2,7 @@ import { useRouter } from '@tanstack/react-router';
 import { AuthForm } from '../components/app/AuthForm';
 import { Input } from '../components/forms/Input';
 import { Password } from '../components/forms/Password';
+import { Button } from '../components/ui/Button';
 import { useZodForm } from '../hooks/use-zod-form';
 import { logInUserSchema } from '../services/auth/auth.schemas';
 import { useAuthService } from '../services/auth/auth.service';
@@ -26,24 +27,27 @@ export const LogIn = () => {
     <AuthForm
       heading="Welcome back"
       subheading="Log in to your account to continue."
-      submitLabel="Log in"
       handleSubmit={handleSubmit}
       onSubmit={onSubmit}
-      isSubmitting={logInMutation.isPending}
     >
-      <Input
-        type="email"
-        id="email"
-        label="Email*"
-        autoComplete="email"
-        {...inputProps}
-      />
-      <Password
-        id="password"
-        label="Password*"
-        autoComplete="current-password"
-        {...inputProps}
-      />
+      <div className="flex flex-col gap-8">
+        <Input
+          type="email"
+          id="email"
+          label="Email*"
+          autoComplete="email"
+          {...inputProps}
+        />
+        <Password
+          id="password"
+          label="Password*"
+          autoComplete="current-password"
+          {...inputProps}
+        />
+      </div>
+      <Button disabled={logInMutation.isPending} className="mx-auto">
+        Log in
+      </Button>
     </AuthForm>
   );
 };

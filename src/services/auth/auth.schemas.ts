@@ -13,6 +13,7 @@ export const signUpUserSchema = z
       .toLowerCase()
       .min(1, { message: 'Enter an email address' })
       .email('Please provide a valid email address'),
+    firstName: z.string().trim().min(1, { message: 'Enter a first name' }),
     password: z
       .string()
       .trim()

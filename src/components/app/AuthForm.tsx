@@ -6,25 +6,20 @@ import type {
   UseFormHandleSubmit,
 } from 'react-hook-form';
 import { useAuthService } from '../../services/auth/auth.service';
-import { Button } from '../ui/Button';
 
 type AuthFormProps<T extends FieldValues> = {
   heading: string;
   subheading: string;
-  submitLabel: string;
   handleSubmit: UseFormHandleSubmit<T>;
   onSubmit: SubmitHandler<T>;
-  isSubmitting: boolean;
   children: ReactNode;
 };
 
 export const AuthForm = <T extends FieldValues>({
   heading,
   subheading,
-  submitLabel,
   handleSubmit,
   onSubmit,
-  isSubmitting,
   children,
 }: AuthFormProps<T>) => {
   const navigate = useNavigate();
@@ -48,9 +43,6 @@ export const AuthForm = <T extends FieldValues>({
           className="flex flex-col gap-12"
         >
           <div className="flex flex-col gap-12">{children}</div>
-          <Button disabled={isSubmitting} className="mx-auto">
-            {submitLabel}
-          </Button>
         </form>
       </div>
     </div>
