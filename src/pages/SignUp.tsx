@@ -35,6 +35,13 @@ export const SignUp = () => {
     setCurrentStep('password');
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent form submission
+      void handleNextStep();
+    }
+  };
+
   const onSubmit = async (data: SignUpUser) => {
     signUpMutation.mutate(data);
     await router.invalidate();
@@ -63,12 +70,14 @@ export const SignUp = () => {
                 id="email"
                 label="Email*"
                 autoComplete="email"
+                onKeyDown={handleKeyDown}
                 {...inputProps}
               />
               <Input
                 id="firstName"
                 label="First name*"
                 autoComplete="given-name"
+                onKeyDown={handleKeyDown}
                 {...inputProps}
               />
             </div>
