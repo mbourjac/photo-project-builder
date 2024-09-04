@@ -34,14 +34,16 @@ export const LogIn = () => {
         <Input
           type="email"
           id="email"
-          label="Email*"
+          label="Email"
           autoComplete="email"
+          isRequired
           {...inputProps}
         />
         <Password
           id="password"
-          label="Password*"
+          label="Password"
           autoComplete="current-password"
+          isRequired
           {...inputProps}
         />
       </div>

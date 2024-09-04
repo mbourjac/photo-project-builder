@@ -9,11 +9,12 @@ export type PasswordProps<T extends FieldValues> = Omit<
   'type'
 > & {
   label: string;
+  isRequired?: boolean;
   autoComplete?: HTMLInputAutoCompleteAttribute;
 };
 
 export const Password = <T extends FieldValues>(props: PasswordProps<T>) => {
-  const { id, label, autoComplete } = props;
+  const { id, label, isRequired, autoComplete } = props;
   const { attributes, errorMessage } = useBaseField({
     ...props,
   });
@@ -26,10 +27,18 @@ export const Password = <T extends FieldValues>(props: PasswordProps<T>) => {
 
   return (
     <div className="flex w-full flex-col gap-1">
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id}>
+        {label}
+        {isRequired && (
+          <>
+            &nbsp;<span aria-hidden="true">*</span>
+          </>
+        )}
+      </label>
       <div className="relative">
         <input
           {...attributes}
+          aria-required={isRequired}
           autoComplete={autoComplete}
           className="w-full rounded-xl border px-3 py-1"
           type={isPasswordVisible ? 'text' : 'password'}

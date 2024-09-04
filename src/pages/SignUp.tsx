@@ -68,15 +68,17 @@ export const SignUp = () => {
               <Input
                 type="email"
                 id="email"
-                label="Email*"
+                label="Email"
                 autoComplete="email"
+                isRequired
                 onKeyDown={handleKeyDown}
                 {...inputProps}
               />
               <Input
                 id="firstName"
-                label="First name*"
+                label="First name"
                 autoComplete="given-name"
+                isRequired
                 onKeyDown={handleKeyDown}
                 {...inputProps}
               />
@@ -95,14 +97,16 @@ export const SignUp = () => {
             <div className="flex flex-col gap-8">
               <Password
                 id="password"
-                label="Password*"
+                label="Password"
                 autoComplete="new-password"
+                isRequired
                 {...inputProps}
               />
               <Password
                 id="confirmPassword"
-                label="Confirm password*"
+                label="Confirm password"
                 autoComplete="new-password"
+                isRequired
                 {...inputProps}
               />
             </div>
