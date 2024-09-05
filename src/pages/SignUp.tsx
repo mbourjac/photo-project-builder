@@ -15,7 +15,7 @@ export const SignUp = () => {
   const { handleSubmit, inputProps, trigger } = useZodForm(signUpUserSchema, {
     defaultValues: {
       email: '',
-      firstName: '',
+      username: '',
       password: '',
       confirmPassword: '',
     },
@@ -26,7 +26,7 @@ export const SignUp = () => {
   );
 
   const handleNextStep = async () => {
-    const output = await trigger(['email', 'firstName'], {
+    const output = await trigger(['email', 'username'], {
       shouldFocus: true,
     });
 
@@ -75,8 +75,8 @@ export const SignUp = () => {
                 {...inputProps}
               />
               <Input
-                id="firstName"
-                label="First name"
+                id="username"
+                label="Username"
                 autoComplete="given-name"
                 isRequired
                 onKeyDown={handleKeyDown}
