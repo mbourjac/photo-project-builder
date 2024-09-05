@@ -2,7 +2,11 @@ import { z } from 'zod';
 
 export const authSchema = z.object({
   accessToken: z.string(),
-  id: z.string(),
+  user: z.object({
+    id: z.string(),
+    username: z.string(),
+    email: z.string(),
+  }),
 });
 
 export const signUpUserSchema = z

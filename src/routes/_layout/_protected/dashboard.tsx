@@ -6,7 +6,9 @@ export const Route = createFileRoute('/_layout/_protected/dashboard')({
   loader: async ({
     context: {
       queryClient,
-      auth: { id },
+      auth: {
+        user: { id },
+      },
       usersService,
     },
   }) => ({
