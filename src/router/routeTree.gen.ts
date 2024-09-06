@@ -16,6 +16,8 @@ import { Route as LayoutIndexImport } from './../routes/_layout/index'
 import { Route as LayoutSignUpImport } from './../routes/_layout/sign-up'
 import { Route as LayoutLogInImport } from './../routes/_layout/log-in'
 import { Route as LayoutProtectedImport } from './../routes/_layout/_protected'
+import { Route as LayoutProtectedSettingsImport } from './../routes/_layout/_protected/settings'
+import { Route as LayoutProtectedProfileImport } from './../routes/_layout/_protected/profile'
 import { Route as LayoutProtectedDashboardImport } from './../routes/_layout/_protected/dashboard'
 
 // Create/Update Routes
@@ -43,6 +45,16 @@ const LayoutLogInRoute = LayoutLogInImport.update({
 const LayoutProtectedRoute = LayoutProtectedImport.update({
   id: '/_protected',
   getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutProtectedSettingsRoute = LayoutProtectedSettingsImport.update({
+  path: '/settings',
+  getParentRoute: () => LayoutProtectedRoute,
+} as any)
+
+const LayoutProtectedProfileRoute = LayoutProtectedProfileImport.update({
+  path: '/profile',
+  getParentRoute: () => LayoutProtectedRoute,
 } as any)
 
 const LayoutProtectedDashboardRoute = LayoutProtectedDashboardImport.update({
@@ -96,6 +108,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutProtectedDashboardImport
       parentRoute: typeof LayoutProtectedImport
     }
+    '/_layout/_protected/profile': {
+      id: '/_layout/_protected/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof LayoutProtectedProfileImport
+      parentRoute: typeof LayoutProtectedImport
+    }
+    '/_layout/_protected/settings': {
+      id: '/_layout/_protected/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof LayoutProtectedSettingsImport
+      parentRoute: typeof LayoutProtectedImport
+    }
   }
 }
 
@@ -105,6 +131,8 @@ export const routeTree = rootRoute.addChildren({
   LayoutRoute: LayoutRoute.addChildren({
     LayoutProtectedRoute: LayoutProtectedRoute.addChildren({
       LayoutProtectedDashboardRoute,
+      LayoutProtectedProfileRoute,
+      LayoutProtectedSettingsRoute,
     }),
     LayoutLogInRoute,
     LayoutSignUpRoute,
@@ -136,7 +164,9 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "_layout/_protected.tsx",
       "parent": "/_layout",
       "children": [
-        "/_layout/_protected/dashboard"
+        "/_layout/_protected/dashboard",
+        "/_layout/_protected/profile",
+        "/_layout/_protected/settings"
       ]
     },
     "/_layout/log-in": {
@@ -153,6 +183,14 @@ export const routeTree = rootRoute.addChildren({
     },
     "/_layout/_protected/dashboard": {
       "filePath": "_layout/_protected/dashboard.tsx",
+      "parent": "/_layout/_protected"
+    },
+    "/_layout/_protected/profile": {
+      "filePath": "_layout/_protected/profile.tsx",
+      "parent": "/_layout/_protected"
+    },
+    "/_layout/_protected/settings": {
+      "filePath": "_layout/_protected/settings.tsx",
       "parent": "/_layout/_protected"
     }
   }

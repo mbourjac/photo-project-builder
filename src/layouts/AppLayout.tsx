@@ -78,6 +78,25 @@ export const AppLayout = () => {
                   </li>
                   <li>
                     <DropdownMenuAction
+                      linkProps={{ to: '/profile' }}
+                      iconKind="profile"
+                    >
+                      Profile
+                    </DropdownMenuAction>
+                  </li>
+                  <li>
+                    <DropdownMenuAction
+                      linkProps={{ to: '/settings' }}
+                      iconKind="settings"
+                    >
+                      Settings
+                    </DropdownMenuAction>
+                  </li>
+                  <li>
+                    <DropdownMenuSeparator />
+                  </li>
+                  <li>
+                    <DropdownMenuAction
                       buttonProps={{ onClick: () => void handleLogOut() }}
                       iconKind="logOut"
                     >
