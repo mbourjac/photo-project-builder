@@ -39,10 +39,10 @@ export const AppLayout = () => {
                 {auth ?
                   <li>
                     <Link
-                      to="/dashboard"
+                      to="/projects"
                       className="inline-block rounded-full px-6 py-1.5 transition-colors hover:bg-zinc-100 data-[status=active]:bg-zinc-100"
                     >
-                      Dashboard
+                      Projects
                     </Link>
                   </li>
                 : <>

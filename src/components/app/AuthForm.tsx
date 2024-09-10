@@ -27,7 +27,7 @@ export const AuthForm = <T extends FieldValues>({
 
   useEffect(() => {
     if (auth) {
-      void navigate({ to: '/dashboard' });
+      void navigate({ to: '/projects' });
     }
   }, [auth, navigate]);
 
