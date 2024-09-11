@@ -21,6 +21,8 @@ export const Password = <T extends FieldValues>(props: PasswordProps<T>) => {
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
+  const messageErrorId = errorMessage ? `${id}-error` : undefined;
+
   const handleTogglePassword = () => {
     setIsPasswordVisible((prevIsPasswordVisible) => !prevIsPasswordVisible);
   };
@@ -40,6 +42,7 @@ export const Password = <T extends FieldValues>(props: PasswordProps<T>) => {
           {...attributes}
           aria-required={isRequired}
           autoComplete={autoComplete}
+          aria-describedby={messageErrorId}
           className="w-full rounded-xl border px-3 py-1"
           type={isPasswordVisible ? 'text' : 'password'}
         />
@@ -57,7 +60,9 @@ export const Password = <T extends FieldValues>(props: PasswordProps<T>) => {
           />
         </button>
       </div>
-      {errorMessage && <ErrorMessage message={errorMessage} />}
+      {errorMessage && (
+        <ErrorMessage id={messageErrorId} message={errorMessage} />
+      )}
     </div>
   );
 };
