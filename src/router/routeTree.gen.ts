@@ -15,6 +15,9 @@ import { Route as LayoutImport } from './../routes/_layout'
 import { Route as LayoutIndexImport } from './../routes/_layout/index'
 import { Route as LayoutSignUpImport } from './../routes/_layout/sign-up'
 import { Route as LayoutLogInImport } from './../routes/_layout/log-in'
+import { Route as LayoutFeaturesImport } from './../routes/_layout/features'
+import { Route as LayoutExploreImport } from './../routes/_layout/explore'
+import { Route as LayoutAboutImport } from './../routes/_layout/about'
 import { Route as LayoutProtectedImport } from './../routes/_layout/_protected'
 import { Route as LayoutProtectedSettingsImport } from './../routes/_layout/_protected/settings'
 import { Route as LayoutProtectedProjectsImport } from './../routes/_layout/_protected/projects'
@@ -40,6 +43,21 @@ const LayoutSignUpRoute = LayoutSignUpImport.update({
 
 const LayoutLogInRoute = LayoutLogInImport.update({
   path: '/log-in',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutFeaturesRoute = LayoutFeaturesImport.update({
+  path: '/features',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutExploreRoute = LayoutExploreImport.update({
+  path: '/explore',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutAboutRoute = LayoutAboutImport.update({
+  path: '/about',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -85,6 +103,27 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof LayoutProtectedImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/about': {
+      id: '/_layout/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof LayoutAboutImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/explore': {
+      id: '/_layout/explore'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof LayoutExploreImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/features': {
+      id: '/_layout/features'
+      path: '/features'
+      fullPath: '/features'
+      preLoaderRoute: typeof LayoutFeaturesImport
       parentRoute: typeof LayoutImport
     }
     '/_layout/log-in': {
@@ -150,6 +189,9 @@ export const routeTree = rootRoute.addChildren({
       }),
       LayoutProtectedSettingsRoute,
     }),
+    LayoutAboutRoute,
+    LayoutExploreRoute,
+    LayoutFeaturesRoute,
     LayoutLogInRoute,
     LayoutSignUpRoute,
     LayoutIndexRoute,
@@ -171,6 +213,9 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "_layout.tsx",
       "children": [
         "/_layout/_protected",
+        "/_layout/about",
+        "/_layout/explore",
+        "/_layout/features",
         "/_layout/log-in",
         "/_layout/sign-up",
         "/_layout/"
@@ -184,6 +229,18 @@ export const routeTree = rootRoute.addChildren({
         "/_layout/_protected/projects",
         "/_layout/_protected/settings"
       ]
+    },
+    "/_layout/about": {
+      "filePath": "_layout/about.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/explore": {
+      "filePath": "_layout/explore.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/features": {
+      "filePath": "_layout/features.tsx",
+      "parent": "/_layout"
     },
     "/_layout/log-in": {
       "filePath": "_layout/log-in.tsx",
