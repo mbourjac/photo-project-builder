@@ -23,6 +23,7 @@ export const DropdownMenu = ({
   const [activeItemIndex, setActiveItemIndex] = useState<number | null>(null);
 
   const isOpen = activeItemIndex !== null;
+  const itemsCount = itemsGroups.flat().length;
 
   const buttonId = 'account-dropdown-button';
   const menuId = 'account-dropdown-menu';
@@ -38,12 +39,20 @@ export const DropdownMenu = ({
   ) => {
     if (event.key === 'ArrowDown') {
       event.preventDefault();
-      setActiveItemIndex(0);
+      setActiveItemIndex((prevActiveItemIndex) =>
+        prevActiveItemIndex !== null ?
+          (prevActiveItemIndex + 1) % itemsCount
+        : 0,
+      );
     }
 
     if (event.key === 'ArrowUp') {
       event.preventDefault();
-      setActiveItemIndex(itemsGroups.flat().length - 1);
+      setActiveItemIndex((prevActiveItemIndex) =>
+        prevActiveItemIndex !== null ?
+          (prevActiveItemIndex - 1 + itemsCount) % itemsCount
+        : itemsCount - 1,
+      );
     }
   };
 
