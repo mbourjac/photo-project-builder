@@ -2,6 +2,8 @@ import { Link, Outlet } from '@tanstack/react-router';
 import { Toaster } from '../../components/ui/Toaster/Toaster';
 import { useAuthService } from '../../services/auth/auth.service';
 import { AccountDropdownMenu } from './AccountDropdownMenu';
+import { AuthNav } from './AuthNav';
+import { MainNav } from './MainNav';
 
 export const AppLayout = () => {
   const { auth } = useAuthService();
@@ -24,39 +26,10 @@ export const AppLayout = () => {
             <span className="sr-only">Home</span>
           </Link>
           <div className="flex items-center gap-4">
-            <nav>
-              <ul className="flex items-center gap-[3px] rounded-full border bg-white p-[3px] text-sm">
-                {auth ?
-                  <li>
-                    <Link
-                      to="/projects"
-                      className="inline-block rounded-full px-6 py-1.5 transition-colors hover:bg-zinc-100 data-[status=active]:bg-zinc-100"
-                    >
-                      Projects
-                    </Link>
-                  </li>
-                : <>
-                    <li>
-                      <Link
-                        to="/log-in"
-                        className="inline-block rounded-full px-6 py-1.5 transition-colors hover:bg-zinc-100 data-[status=active]:bg-zinc-100"
-                      >
-                        Log in
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/sign-up"
-                        className="inline-block rounded-full px-6 py-1.5 transition-colors hover:bg-zinc-100 data-[status=active]:bg-zinc-100"
-                      >
-                        Sign up
-                      </Link>
-                    </li>
-                  </>
-                }
-              </ul>
-            </nav>
-            {auth && <AccountDropdownMenu auth={auth} />}
+            <MainNav auth={auth} />
+            {auth ?
+              <AccountDropdownMenu auth={auth} />
+            : <AuthNav />}
           </div>
         </header>
         <main className="flex grow px-8 py-4">
