@@ -40,6 +40,7 @@ export const MainNav = ({ auth }: MainNavProps) => {
         {auth && (
           <Link
             to="/projects"
+            activeOptions={{ exact: true }}
             className="relative z-10 inline-block rounded-full px-6 py-1.5 transition-colors"
           >
             Projects

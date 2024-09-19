@@ -22,7 +22,11 @@ import { Route as LayoutProtectedImport } from './../routes/_layout/_protected'
 import { Route as LayoutProtectedSettingsImport } from './../routes/_layout/_protected/settings'
 import { Route as LayoutProtectedProjectsImport } from './../routes/_layout/_protected/projects'
 import { Route as LayoutProtectedProfileImport } from './../routes/_layout/_protected/profile'
-import { Route as LayoutProtectedProjectsIndexImport } from './../routes/_layout/_protected/projects/index'
+import { Route as LayoutProtectedProjectsLayoutImport } from './../routes/_layout/_protected/projects/_layout'
+import { Route as LayoutProtectedProjectsLayoutIndexImport } from './../routes/_layout/_protected/projects/_layout/index'
+import { Route as LayoutProtectedProjectsLayoutTimelineImport } from './../routes/_layout/_protected/projects/_layout/timeline'
+import { Route as LayoutProtectedProjectsLayoutTagsImport } from './../routes/_layout/_protected/projects/_layout/tags'
+import { Route as LayoutProtectedProjectsLayoutMapImport } from './../routes/_layout/_protected/projects/_layout/map'
 
 // Create/Update Routes
 
@@ -81,10 +85,34 @@ const LayoutProtectedProfileRoute = LayoutProtectedProfileImport.update({
   getParentRoute: () => LayoutProtectedRoute,
 } as any)
 
-const LayoutProtectedProjectsIndexRoute =
-  LayoutProtectedProjectsIndexImport.update({
-    path: '/',
+const LayoutProtectedProjectsLayoutRoute =
+  LayoutProtectedProjectsLayoutImport.update({
+    id: '/_layout',
     getParentRoute: () => LayoutProtectedProjectsRoute,
+  } as any)
+
+const LayoutProtectedProjectsLayoutIndexRoute =
+  LayoutProtectedProjectsLayoutIndexImport.update({
+    path: '/',
+    getParentRoute: () => LayoutProtectedProjectsLayoutRoute,
+  } as any)
+
+const LayoutProtectedProjectsLayoutTimelineRoute =
+  LayoutProtectedProjectsLayoutTimelineImport.update({
+    path: '/timeline',
+    getParentRoute: () => LayoutProtectedProjectsLayoutRoute,
+  } as any)
+
+const LayoutProtectedProjectsLayoutTagsRoute =
+  LayoutProtectedProjectsLayoutTagsImport.update({
+    path: '/tags',
+    getParentRoute: () => LayoutProtectedProjectsLayoutRoute,
+  } as any)
+
+const LayoutProtectedProjectsLayoutMapRoute =
+  LayoutProtectedProjectsLayoutMapImport.update({
+    path: '/map',
+    getParentRoute: () => LayoutProtectedProjectsLayoutRoute,
   } as any)
 
 // Populate the FileRoutesByPath interface
@@ -168,12 +196,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutProtectedSettingsImport
       parentRoute: typeof LayoutProtectedImport
     }
-    '/_layout/_protected/projects/': {
-      id: '/_layout/_protected/projects/'
+    '/_layout/_protected/projects/_layout': {
+      id: '/_layout/_protected/projects/_layout'
+      path: ''
+      fullPath: '/projects'
+      preLoaderRoute: typeof LayoutProtectedProjectsLayoutImport
+      parentRoute: typeof LayoutProtectedProjectsImport
+    }
+    '/_layout/_protected/projects/_layout/map': {
+      id: '/_layout/_protected/projects/_layout/map'
+      path: '/map'
+      fullPath: '/projects/map'
+      preLoaderRoute: typeof LayoutProtectedProjectsLayoutMapImport
+      parentRoute: typeof LayoutProtectedProjectsLayoutImport
+    }
+    '/_layout/_protected/projects/_layout/tags': {
+      id: '/_layout/_protected/projects/_layout/tags'
+      path: '/tags'
+      fullPath: '/projects/tags'
+      preLoaderRoute: typeof LayoutProtectedProjectsLayoutTagsImport
+      parentRoute: typeof LayoutProtectedProjectsLayoutImport
+    }
+    '/_layout/_protected/projects/_layout/timeline': {
+      id: '/_layout/_protected/projects/_layout/timeline'
+      path: '/timeline'
+      fullPath: '/projects/timeline'
+      preLoaderRoute: typeof LayoutProtectedProjectsLayoutTimelineImport
+      parentRoute: typeof LayoutProtectedProjectsLayoutImport
+    }
+    '/_layout/_protected/projects/_layout/': {
+      id: '/_layout/_protected/projects/_layout/'
       path: '/'
       fullPath: '/projects/'
-      preLoaderRoute: typeof LayoutProtectedProjectsIndexImport
-      parentRoute: typeof LayoutProtectedProjectsImport
+      preLoaderRoute: typeof LayoutProtectedProjectsLayoutIndexImport
+      parentRoute: typeof LayoutProtectedProjectsLayoutImport
     }
   }
 }
@@ -185,7 +241,13 @@ export const routeTree = rootRoute.addChildren({
     LayoutProtectedRoute: LayoutProtectedRoute.addChildren({
       LayoutProtectedProfileRoute,
       LayoutProtectedProjectsRoute: LayoutProtectedProjectsRoute.addChildren({
-        LayoutProtectedProjectsIndexRoute,
+        LayoutProtectedProjectsLayoutRoute:
+          LayoutProtectedProjectsLayoutRoute.addChildren({
+            LayoutProtectedProjectsLayoutMapRoute,
+            LayoutProtectedProjectsLayoutTagsRoute,
+            LayoutProtectedProjectsLayoutTimelineRoute,
+            LayoutProtectedProjectsLayoutIndexRoute,
+          }),
       }),
       LayoutProtectedSettingsRoute,
     }),
@@ -262,16 +324,38 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "_layout/_protected/projects.tsx",
       "parent": "/_layout/_protected",
       "children": [
-        "/_layout/_protected/projects/"
+        "/_layout/_protected/projects/_layout"
       ]
     },
     "/_layout/_protected/settings": {
       "filePath": "_layout/_protected/settings.tsx",
       "parent": "/_layout/_protected"
     },
-    "/_layout/_protected/projects/": {
-      "filePath": "_layout/_protected/projects/index.tsx",
-      "parent": "/_layout/_protected/projects"
+    "/_layout/_protected/projects/_layout": {
+      "filePath": "_layout/_protected/projects/_layout.tsx",
+      "parent": "/_layout/_protected/projects",
+      "children": [
+        "/_layout/_protected/projects/_layout/map",
+        "/_layout/_protected/projects/_layout/tags",
+        "/_layout/_protected/projects/_layout/timeline",
+        "/_layout/_protected/projects/_layout/"
+      ]
+    },
+    "/_layout/_protected/projects/_layout/map": {
+      "filePath": "_layout/_protected/projects/_layout/map.tsx",
+      "parent": "/_layout/_protected/projects/_layout"
+    },
+    "/_layout/_protected/projects/_layout/tags": {
+      "filePath": "_layout/_protected/projects/_layout/tags.tsx",
+      "parent": "/_layout/_protected/projects/_layout"
+    },
+    "/_layout/_protected/projects/_layout/timeline": {
+      "filePath": "_layout/_protected/projects/_layout/timeline.tsx",
+      "parent": "/_layout/_protected/projects/_layout"
+    },
+    "/_layout/_protected/projects/_layout/": {
+      "filePath": "_layout/_protected/projects/_layout/index.tsx",
+      "parent": "/_layout/_protected/projects/_layout"
     }
   }
 }
