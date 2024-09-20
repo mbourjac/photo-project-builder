@@ -20,9 +20,9 @@ export const Input = <T extends FieldValues>(props: InputProps<T>) => {
   const messageErrorId = errorMessage ? `${id}-error` : undefined;
 
   return (
-    <div className="flex w-full flex-col gap-1">
+    <div className="flex w-full flex-col gap-1 text-sm">
       <label htmlFor={id} className="flex items-baseline">
-        {label}
+        <span className="font-semibold">{label}</span>
         {isRequired && (
           <>
             &nbsp;<span aria-hidden="true">*</span>
@@ -36,7 +36,7 @@ export const Input = <T extends FieldValues>(props: InputProps<T>) => {
           autoComplete={autoComplete}
           onKeyDown={onKeyDown}
           aria-describedby={messageErrorId}
-          className="w-full rounded-xl border px-3 py-1"
+          className="w-full rounded-md border px-3 py-1"
         />
       </div>
       {errorMessage && (

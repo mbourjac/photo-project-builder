@@ -28,9 +28,9 @@ export const Password = <T extends FieldValues>(props: PasswordProps<T>) => {
   };
 
   return (
-    <div className="flex w-full flex-col gap-1">
+    <div className="flex w-full flex-col gap-1 text-sm">
       <label htmlFor={id}>
-        {label}
+        <span className="font-semibold">{label}</span>
         {isRequired && (
           <>
             &nbsp;<span aria-hidden="true">*</span>
@@ -43,13 +43,13 @@ export const Password = <T extends FieldValues>(props: PasswordProps<T>) => {
           aria-required={isRequired}
           autoComplete={autoComplete}
           aria-describedby={messageErrorId}
-          className="w-full rounded-xl border px-3 py-1"
+          className="w-full rounded-md border px-3 py-1"
           type={isPasswordVisible ? 'text' : 'password'}
         />
         <button
           type="button"
           onClick={handleTogglePassword}
-          className="absolute right-0 top-0 flex aspect-square h-full items-center justify-center rounded-xl px-3"
+          className="absolute right-0 top-0 flex aspect-square h-full items-center justify-center rounded-md px-3"
         >
           <Icon
             kind={isPasswordVisible ? 'hidden' : 'visible'}
