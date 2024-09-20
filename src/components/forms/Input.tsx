@@ -14,10 +14,8 @@ export type InputProps<T extends FieldValues> = BaseFieldProps<T> & {
 };
 
 export const Input = <T extends FieldValues>(props: InputProps<T>) => {
-  const { attributes, errorMessage } = useBaseField(props);
+  const { attributes, errorMessage, errorMessageId } = useBaseField(props);
   const { id, label, isRequired, autoComplete, onKeyDown } = props;
-
-  const messageErrorId = errorMessage ? `${id}-error` : undefined;
 
   return (
     <div className="flex w-full flex-col gap-1 text-sm">
@@ -35,12 +33,12 @@ export const Input = <T extends FieldValues>(props: InputProps<T>) => {
           aria-required={isRequired}
           autoComplete={autoComplete}
           onKeyDown={onKeyDown}
-          aria-describedby={messageErrorId}
+          aria-describedby={errorMessageId}
           className="w-full rounded-md border px-3 py-1"
         />
       </div>
       {errorMessage && (
-        <ErrorMessage id={messageErrorId} message={errorMessage} />
+        <ErrorMessage id={errorMessageId} message={errorMessage} />
       )}
     </div>
   );

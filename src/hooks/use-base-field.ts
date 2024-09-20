@@ -24,6 +24,7 @@ export const useBaseField = <T extends FieldValues>({
 }: BaseFieldProps<T>) => {
   const fieldState = getFieldState(id, formState);
   const errorMessage = fieldState.error?.message?.toString();
+  const errorMessageId = `${id}-error`;
 
   const attributes = {
     id,
@@ -36,5 +37,6 @@ export const useBaseField = <T extends FieldValues>({
     attributes,
     fieldState,
     errorMessage,
+    errorMessageId,
   };
 };
