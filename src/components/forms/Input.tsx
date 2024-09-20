@@ -5,6 +5,7 @@ import type {
 import type { FieldValues } from 'react-hook-form';
 import { type BaseFieldProps, useBaseField } from '../../hooks/use-base-field';
 import { ErrorMessage } from './ErrorMessage';
+import { Label } from './Label';
 
 export type InputProps<T extends FieldValues> = BaseFieldProps<T> & {
   label: string;
@@ -15,18 +16,15 @@ export type InputProps<T extends FieldValues> = BaseFieldProps<T> & {
 
 export const Input = <T extends FieldValues>(props: InputProps<T>) => {
   const { attributes, errorMessage, errorMessageId } = useBaseField(props);
-  const { id, label, isRequired, autoComplete, onKeyDown } = props;
+  const { label, isRequired, autoComplete, onKeyDown } = props;
 
   return (
     <div className="flex w-full flex-col gap-1 text-sm">
-      <label htmlFor={id} className="flex items-baseline">
-        <span className="font-semibold">{label}</span>
-        {isRequired && (
-          <>
-            &nbsp;<span aria-hidden="true">*</span>
-          </>
-        )}
-      </label>
+      <Label
+        label={label}
+        htmlFor={errorMessageId}
+        isInputRequired={isRequired}
+      />
       <div>
         <input
           {...attributes}

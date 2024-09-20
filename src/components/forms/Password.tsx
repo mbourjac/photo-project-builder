@@ -3,6 +3,7 @@ import type { FieldValues } from 'react-hook-form';
 import { type BaseFieldProps, useBaseField } from '../../hooks/use-base-field';
 import { Icon } from '../ui/Icon';
 import { ErrorMessage } from './ErrorMessage';
+import { Label } from './Label';
 
 export type PasswordProps<T extends FieldValues> = Omit<
   BaseFieldProps<T>,
@@ -14,7 +15,7 @@ export type PasswordProps<T extends FieldValues> = Omit<
 };
 
 export const Password = <T extends FieldValues>(props: PasswordProps<T>) => {
-  const { id, label, isRequired, autoComplete } = props;
+  const { label, isRequired, autoComplete } = props;
   const { attributes, errorMessage, errorMessageId } = useBaseField({
     ...props,
   });
@@ -27,14 +28,11 @@ export const Password = <T extends FieldValues>(props: PasswordProps<T>) => {
 
   return (
     <div className="flex w-full flex-col gap-1 text-sm">
-      <label htmlFor={id}>
-        <span className="font-semibold">{label}</span>
-        {isRequired && (
-          <>
-            &nbsp;<span aria-hidden="true">*</span>
-          </>
-        )}
-      </label>
+      <Label
+        label={label}
+        htmlFor={errorMessageId}
+        isInputRequired={isRequired}
+      />
       <div className="relative">
         <input
           {...attributes}
