@@ -5,6 +5,7 @@ import {
   useEffect,
   type KeyboardEvent as ReactKeyboardEvent,
 } from 'react';
+import { useClickOutside } from '../../../hooks/use-click-outside';
 import { DropdownMenuContext } from './DropdownMenuContext/DropdownMenuContext';
 import type { DropdownMenuItemProps } from './DropdownMenuItem';
 
@@ -28,7 +29,9 @@ export const DropdownMenu = ({
   const buttonId = 'account-dropdown-button';
   const menuId = 'account-dropdown-menu';
 
-  const handleToggleMenu = () => {
+  useClickOutside(dropdownMenuRef, () => setActiveItemIndex(null), isOpen);
+
+  const handleButtonClick = () => {
     setActiveItemIndex((prevActiveItemIndex) =>
       prevActiveItemIndex !== null ? null : 0,
     );
@@ -57,32 +60,18 @@ export const DropdownMenu = ({
   };
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownMenuRef.current &&
-        !dropdownMenuRef.current.contains(event.target as Node)
-      ) {
-        setActiveItemIndex(null);
-      }
-    };
-
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const handleGlobalKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape' || event.key === 'Tab') {
         setActiveItemIndex(null);
       }
     };
 
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      document.addEventListener('keydown', handleKeyDown);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleKeyDown);
+      document.addEventListener('keydown', handleGlobalKeyDown);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keydown', handleGlobalKeyDown);
     };
   }, [isOpen]);
 
@@ -101,9 +90,9 @@ export const DropdownMenu = ({
           aria-haspopup="true"
           aria-expanded={isOpen}
           aria-controls={menuId}
-          onClick={handleToggleMenu}
+          onClick={handleButtonClick}
           onKeyDown={handleButtonKeyDown}
-          className="size-full rounded-full bg-black text-sm text-white hover:opacity-75"
+          className="size-full rounded-full border border-white bg-black text-sm text-white hover:opacity-75"
         >
           <span aria-hidden="true">{label}</span>
         </button>
