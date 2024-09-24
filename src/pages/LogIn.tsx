@@ -11,7 +11,7 @@ import type { LogInUser } from '../services/auth/auth.types';
 export const LogIn = () => {
   const router = useRouter();
   const { logInMutation } = useAuthService();
-  const { handleSubmit, inputProps } = useZodForm(logInUserSchema, {
+  const { handleSubmit, configInput } = useZodForm(logInUserSchema, {
     defaultValues: {
       email: '',
       password: '',
@@ -37,14 +37,14 @@ export const LogIn = () => {
           label="Email"
           autoComplete="email"
           isRequired
-          {...inputProps}
+          config={configInput}
         />
         <Password
           id="password"
           label="Password"
           autoComplete="current-password"
           isRequired
-          {...inputProps}
+          config={configInput}
         />
       </div>
       <Button disabled={logInMutation.isPending} className="mx-auto">

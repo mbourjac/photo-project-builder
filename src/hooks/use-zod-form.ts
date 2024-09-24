@@ -12,11 +12,11 @@ export const useZodForm = <T extends z.ZodTypeAny>(
     ...formProps,
   });
 
-  const inputProps = {
+  const configInput = {
     register: form.register,
     getFieldState: form.getFieldState,
     formState: form.formState,
   };
 
-  return { ...form, inputProps };
+  return { ...form, configInput };
 };

@@ -12,7 +12,7 @@ import type { SignUpUser } from '../services/auth/auth.types';
 export const SignUp = () => {
   const router = useRouter();
   const { signUpMutation } = useAuthService();
-  const { handleSubmit, inputProps, trigger } = useZodForm(signUpUserSchema, {
+  const { handleSubmit, configInput, trigger } = useZodForm(signUpUserSchema, {
     defaultValues: {
       email: '',
       username: '',
@@ -72,7 +72,7 @@ export const SignUp = () => {
                 autoComplete="email"
                 isRequired
                 onKeyDown={handleKeyDown}
-                {...inputProps}
+                config={configInput}
               />
               <Input
                 id="username"
@@ -80,7 +80,7 @@ export const SignUp = () => {
                 autoComplete="given-name"
                 isRequired
                 onKeyDown={handleKeyDown}
-                {...inputProps}
+                config={configInput}
               />
             </div>
             <Button
@@ -100,14 +100,14 @@ export const SignUp = () => {
                 label="Password"
                 autoComplete="new-password"
                 isRequired
-                {...inputProps}
+                config={configInput}
               />
               <Password
                 id="confirmPassword"
                 label="Confirm password"
                 autoComplete="new-password"
                 isRequired
-                {...inputProps}
+                config={configInput}
               />
             </div>
             <Button
