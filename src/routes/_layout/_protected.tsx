@@ -2,7 +2,7 @@ import { createFileRoute, redirect } from '@tanstack/react-router';
 import type { DefinedRoute } from '../../router/router.types';
 
 export const Route = createFileRoute('/_layout/_protected')({
-  beforeLoad: ({ context: { authService }, location }) => {
+  beforeLoad: ({ context: { baseAPI, authService }, location }) => {
     const { auth } = authService;
 
     if (!auth) {
@@ -14,6 +14,8 @@ export const Route = createFileRoute('/_layout/_protected')({
         },
       });
     }
+
+    baseAPI.defaults.headers.Authorization = `Bearer ${auth.accessToken}`;
 
     return { auth };
   },

@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { getErrorMessage } from '../../helpers/errors';
+import { baseAPI } from '../../lib/axios.instance';
 import { logInRequest, signUpRequest } from './auth.api';
 import { authSchema } from './auth.schemas';
 import { useAuthStore } from './auth.store';
@@ -43,6 +44,7 @@ export const useAuthService = () => {
 
   const logOut = () => {
     setAuth(null);
+    delete baseAPI.defaults.headers.Authorization;
   };
 
   return { auth, signUpMutation, logInMutation, logOut };
