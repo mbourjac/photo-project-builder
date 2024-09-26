@@ -23,6 +23,7 @@ import { Route as LayoutProtectedSettingsImport } from './../routes/_layout/_pro
 import { Route as LayoutProtectedProjectsImport } from './../routes/_layout/_protected/projects'
 import { Route as LayoutProtectedProfileImport } from './../routes/_layout/_protected/profile'
 import { Route as LayoutProtectedProjectsLayoutImport } from './../routes/_layout/_protected/projects/_layout'
+import { Route as LayoutProtectedProjectsProjectIdImport } from './../routes/_layout/_protected/projects/$projectId'
 import { Route as LayoutProtectedProjectsLayoutIndexImport } from './../routes/_layout/_protected/projects/_layout/index'
 import { Route as LayoutProtectedProjectsLayoutTimelineImport } from './../routes/_layout/_protected/projects/_layout/timeline'
 import { Route as LayoutProtectedProjectsLayoutTagsImport } from './../routes/_layout/_protected/projects/_layout/tags'
@@ -88,6 +89,12 @@ const LayoutProtectedProfileRoute = LayoutProtectedProfileImport.update({
 const LayoutProtectedProjectsLayoutRoute =
   LayoutProtectedProjectsLayoutImport.update({
     id: '/_layout',
+    getParentRoute: () => LayoutProtectedProjectsRoute,
+  } as any)
+
+const LayoutProtectedProjectsProjectIdRoute =
+  LayoutProtectedProjectsProjectIdImport.update({
+    path: '/$projectId',
     getParentRoute: () => LayoutProtectedProjectsRoute,
   } as any)
 
@@ -196,6 +203,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutProtectedSettingsImport
       parentRoute: typeof LayoutProtectedImport
     }
+    '/_layout/_protected/projects/$projectId': {
+      id: '/_layout/_protected/projects/$projectId'
+      path: '/$projectId'
+      fullPath: '/projects/$projectId'
+      preLoaderRoute: typeof LayoutProtectedProjectsProjectIdImport
+      parentRoute: typeof LayoutProtectedProjectsImport
+    }
     '/_layout/_protected/projects/_layout': {
       id: '/_layout/_protected/projects/_layout'
       path: ''
@@ -241,6 +255,7 @@ export const routeTree = rootRoute.addChildren({
     LayoutProtectedRoute: LayoutProtectedRoute.addChildren({
       LayoutProtectedProfileRoute,
       LayoutProtectedProjectsRoute: LayoutProtectedProjectsRoute.addChildren({
+        LayoutProtectedProjectsProjectIdRoute,
         LayoutProtectedProjectsLayoutRoute:
           LayoutProtectedProjectsLayoutRoute.addChildren({
             LayoutProtectedProjectsLayoutMapRoute,
@@ -324,12 +339,17 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "_layout/_protected/projects.tsx",
       "parent": "/_layout/_protected",
       "children": [
+        "/_layout/_protected/projects/$projectId",
         "/_layout/_protected/projects/_layout"
       ]
     },
     "/_layout/_protected/settings": {
       "filePath": "_layout/_protected/settings.tsx",
       "parent": "/_layout/_protected"
+    },
+    "/_layout/_protected/projects/$projectId": {
+      "filePath": "_layout/_protected/projects/$projectId.tsx",
+      "parent": "/_layout/_protected/projects"
     },
     "/_layout/_protected/projects/_layout": {
       "filePath": "_layout/_protected/projects/_layout.tsx",
