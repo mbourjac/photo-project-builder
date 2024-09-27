@@ -11,8 +11,8 @@ export const AppLayout = () => {
   return (
     <>
       <Toaster />
-      <div className="flex min-h-dvh flex-col">
-        <header className="flex items-center justify-between px-8 py-4">
+      <div className="relative flex h-dvh flex-col">
+        <header className="fixed left-0 top-0 z-20 flex w-full items-center justify-between bg-transparent px-8 py-4">
           <Link to="/">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -32,9 +32,7 @@ export const AppLayout = () => {
             : <AuthNav />}
           </div>
         </header>
-        <main className="flex grow px-8 py-4">
-          <Outlet />
-        </main>
+        <Outlet />
       </div>
     </>
   );

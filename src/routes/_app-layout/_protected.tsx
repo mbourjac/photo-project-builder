@@ -1,7 +1,7 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
 import type { DefinedRoute } from '../../router/router.types';
 
-export const Route = createFileRoute('/_layout/_protected')({
+export const Route = createFileRoute('/_app-layout/_protected')({
   beforeLoad: ({ context: { baseAPI, authService }, location }) => {
     const { auth } = authService;
 

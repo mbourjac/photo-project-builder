@@ -32,19 +32,17 @@ export const AuthForm = <T extends FieldValues>({
   }, [auth, navigate]);
 
   return (
-    <div className="flex grow overflow-auto">
-      <div className="flex w-[min(32rem,100%)] flex-col justify-center gap-12 rounded-3xl border bg-white px-12 py-16">
-        <div className="flex flex-col gap-2">
-          <h1 className="text-xl font-bold">{heading}</h1>
-          <p>{subheading}</p>
-        </div>
-        <form
-          onSubmit={(event) => void handleSubmit(onSubmit)(event)}
-          className="flex flex-col gap-12"
-        >
-          <div className="flex flex-col gap-12">{children}</div>
-        </form>
+    <div className="flex w-[min(32rem,100%)] flex-col justify-center gap-12 rounded-3xl border bg-white px-12 py-16">
+      <div className="flex flex-col gap-2">
+        <h1 className="text-xl font-bold">{heading}</h1>
+        <p>{subheading}</p>
       </div>
+      <form
+        onSubmit={(event) => void handleSubmit(onSubmit)(event)}
+        className="flex flex-col gap-12"
+      >
+        <div className="flex flex-col gap-12">{children}</div>
+      </form>
     </div>
   );
 };

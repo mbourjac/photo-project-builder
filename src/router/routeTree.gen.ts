@@ -11,239 +11,283 @@
 // Import Routes
 
 import { Route as rootRoute } from './../routes/__root'
-import { Route as LayoutImport } from './../routes/_layout'
-import { Route as LayoutIndexImport } from './../routes/_layout/index'
-import { Route as LayoutSignUpImport } from './../routes/_layout/sign-up'
-import { Route as LayoutLogInImport } from './../routes/_layout/log-in'
-import { Route as LayoutFeaturesImport } from './../routes/_layout/features'
-import { Route as LayoutExploreImport } from './../routes/_layout/explore'
-import { Route as LayoutAboutImport } from './../routes/_layout/about'
-import { Route as LayoutProtectedImport } from './../routes/_layout/_protected'
-import { Route as LayoutProtectedSettingsImport } from './../routes/_layout/_protected/settings'
-import { Route as LayoutProtectedProjectsImport } from './../routes/_layout/_protected/projects'
-import { Route as LayoutProtectedProfileImport } from './../routes/_layout/_protected/profile'
-import { Route as LayoutProtectedProjectsLayoutImport } from './../routes/_layout/_protected/projects/_layout'
-import { Route as LayoutProtectedProjectsProjectIdImport } from './../routes/_layout/_protected/projects/$projectId'
-import { Route as LayoutProtectedProjectsLayoutIndexImport } from './../routes/_layout/_protected/projects/_layout/index'
-import { Route as LayoutProtectedProjectsLayoutTimelineImport } from './../routes/_layout/_protected/projects/_layout/timeline'
-import { Route as LayoutProtectedProjectsLayoutTagsImport } from './../routes/_layout/_protected/projects/_layout/tags'
-import { Route as LayoutProtectedProjectsLayoutMapImport } from './../routes/_layout/_protected/projects/_layout/map'
+import { Route as AppLayoutImport } from './../routes/_app-layout'
+import { Route as AppLayoutPublicImport } from './../routes/_app-layout/_public'
+import { Route as AppLayoutProtectedImport } from './../routes/_app-layout/_protected'
+import { Route as AppLayoutPublicIndexImport } from './../routes/_app-layout/_public/index'
+import { Route as AppLayoutPublicSignUpImport } from './../routes/_app-layout/_public/sign-up'
+import { Route as AppLayoutPublicLogInImport } from './../routes/_app-layout/_public/log-in'
+import { Route as AppLayoutPublicFeaturesImport } from './../routes/_app-layout/_public/features'
+import { Route as AppLayoutPublicExploreImport } from './../routes/_app-layout/_public/explore'
+import { Route as AppLayoutPublicAboutImport } from './../routes/_app-layout/_public/about'
+import { Route as AppLayoutProtectedProjectsImport } from './../routes/_app-layout/_protected/projects'
+import { Route as AppLayoutProtectedAccountImport } from './../routes/_app-layout/_protected/_account'
+import { Route as AppLayoutProtectedProjectsProjectsLayoutImport } from './../routes/_app-layout/_protected/projects/_projects-layout'
+import { Route as AppLayoutProtectedProjectsProjectDetailsImport } from './../routes/_app-layout/_protected/projects/_project-details'
+import { Route as AppLayoutProtectedAccountSettingsImport } from './../routes/_app-layout/_protected/_account/settings'
+import { Route as AppLayoutProtectedAccountProfileImport } from './../routes/_app-layout/_protected/_account/profile'
+import { Route as AppLayoutProtectedProjectsProjectsLayoutIndexImport } from './../routes/_app-layout/_protected/projects/_projects-layout/index'
+import { Route as AppLayoutProtectedProjectsProjectsLayoutTimelineImport } from './../routes/_app-layout/_protected/projects/_projects-layout/timeline'
+import { Route as AppLayoutProtectedProjectsProjectsLayoutTagsImport } from './../routes/_app-layout/_protected/projects/_projects-layout/tags'
+import { Route as AppLayoutProtectedProjectsProjectsLayoutMapImport } from './../routes/_app-layout/_protected/projects/_projects-layout/map'
+import { Route as AppLayoutProtectedProjectsProjectDetailsProjectIdImport } from './../routes/_app-layout/_protected/projects/_project-details/$projectId'
 
 // Create/Update Routes
 
-const LayoutRoute = LayoutImport.update({
-  id: '/_layout',
+const AppLayoutRoute = AppLayoutImport.update({
+  id: '/_app-layout',
   getParentRoute: () => rootRoute,
 } as any)
 
-const LayoutIndexRoute = LayoutIndexImport.update({
-  path: '/',
-  getParentRoute: () => LayoutRoute,
+const AppLayoutPublicRoute = AppLayoutPublicImport.update({
+  id: '/_public',
+  getParentRoute: () => AppLayoutRoute,
 } as any)
 
-const LayoutSignUpRoute = LayoutSignUpImport.update({
-  path: '/sign-up',
-  getParentRoute: () => LayoutRoute,
-} as any)
-
-const LayoutLogInRoute = LayoutLogInImport.update({
-  path: '/log-in',
-  getParentRoute: () => LayoutRoute,
-} as any)
-
-const LayoutFeaturesRoute = LayoutFeaturesImport.update({
-  path: '/features',
-  getParentRoute: () => LayoutRoute,
-} as any)
-
-const LayoutExploreRoute = LayoutExploreImport.update({
-  path: '/explore',
-  getParentRoute: () => LayoutRoute,
-} as any)
-
-const LayoutAboutRoute = LayoutAboutImport.update({
-  path: '/about',
-  getParentRoute: () => LayoutRoute,
-} as any)
-
-const LayoutProtectedRoute = LayoutProtectedImport.update({
+const AppLayoutProtectedRoute = AppLayoutProtectedImport.update({
   id: '/_protected',
-  getParentRoute: () => LayoutRoute,
+  getParentRoute: () => AppLayoutRoute,
 } as any)
 
-const LayoutProtectedSettingsRoute = LayoutProtectedSettingsImport.update({
-  path: '/settings',
-  getParentRoute: () => LayoutProtectedRoute,
+const AppLayoutPublicIndexRoute = AppLayoutPublicIndexImport.update({
+  path: '/',
+  getParentRoute: () => AppLayoutPublicRoute,
 } as any)
 
-const LayoutProtectedProjectsRoute = LayoutProtectedProjectsImport.update({
-  path: '/projects',
-  getParentRoute: () => LayoutProtectedRoute,
+const AppLayoutPublicSignUpRoute = AppLayoutPublicSignUpImport.update({
+  path: '/sign-up',
+  getParentRoute: () => AppLayoutPublicRoute,
 } as any)
 
-const LayoutProtectedProfileRoute = LayoutProtectedProfileImport.update({
-  path: '/profile',
-  getParentRoute: () => LayoutProtectedRoute,
+const AppLayoutPublicLogInRoute = AppLayoutPublicLogInImport.update({
+  path: '/log-in',
+  getParentRoute: () => AppLayoutPublicRoute,
 } as any)
 
-const LayoutProtectedProjectsLayoutRoute =
-  LayoutProtectedProjectsLayoutImport.update({
-    id: '/_layout',
-    getParentRoute: () => LayoutProtectedProjectsRoute,
+const AppLayoutPublicFeaturesRoute = AppLayoutPublicFeaturesImport.update({
+  path: '/features',
+  getParentRoute: () => AppLayoutPublicRoute,
+} as any)
+
+const AppLayoutPublicExploreRoute = AppLayoutPublicExploreImport.update({
+  path: '/explore',
+  getParentRoute: () => AppLayoutPublicRoute,
+} as any)
+
+const AppLayoutPublicAboutRoute = AppLayoutPublicAboutImport.update({
+  path: '/about',
+  getParentRoute: () => AppLayoutPublicRoute,
+} as any)
+
+const AppLayoutProtectedProjectsRoute = AppLayoutProtectedProjectsImport.update(
+  {
+    path: '/projects',
+    getParentRoute: () => AppLayoutProtectedRoute,
+  } as any,
+)
+
+const AppLayoutProtectedAccountRoute = AppLayoutProtectedAccountImport.update({
+  id: '/_account',
+  getParentRoute: () => AppLayoutProtectedRoute,
+} as any)
+
+const AppLayoutProtectedProjectsProjectsLayoutRoute =
+  AppLayoutProtectedProjectsProjectsLayoutImport.update({
+    id: '/_projects-layout',
+    getParentRoute: () => AppLayoutProtectedProjectsRoute,
   } as any)
 
-const LayoutProtectedProjectsProjectIdRoute =
-  LayoutProtectedProjectsProjectIdImport.update({
-    path: '/$projectId',
-    getParentRoute: () => LayoutProtectedProjectsRoute,
+const AppLayoutProtectedProjectsProjectDetailsRoute =
+  AppLayoutProtectedProjectsProjectDetailsImport.update({
+    id: '/_project-details',
+    getParentRoute: () => AppLayoutProtectedProjectsRoute,
   } as any)
 
-const LayoutProtectedProjectsLayoutIndexRoute =
-  LayoutProtectedProjectsLayoutIndexImport.update({
+const AppLayoutProtectedAccountSettingsRoute =
+  AppLayoutProtectedAccountSettingsImport.update({
+    path: '/settings',
+    getParentRoute: () => AppLayoutProtectedAccountRoute,
+  } as any)
+
+const AppLayoutProtectedAccountProfileRoute =
+  AppLayoutProtectedAccountProfileImport.update({
+    path: '/profile',
+    getParentRoute: () => AppLayoutProtectedAccountRoute,
+  } as any)
+
+const AppLayoutProtectedProjectsProjectsLayoutIndexRoute =
+  AppLayoutProtectedProjectsProjectsLayoutIndexImport.update({
     path: '/',
-    getParentRoute: () => LayoutProtectedProjectsLayoutRoute,
+    getParentRoute: () => AppLayoutProtectedProjectsProjectsLayoutRoute,
   } as any)
 
-const LayoutProtectedProjectsLayoutTimelineRoute =
-  LayoutProtectedProjectsLayoutTimelineImport.update({
+const AppLayoutProtectedProjectsProjectsLayoutTimelineRoute =
+  AppLayoutProtectedProjectsProjectsLayoutTimelineImport.update({
     path: '/timeline',
-    getParentRoute: () => LayoutProtectedProjectsLayoutRoute,
+    getParentRoute: () => AppLayoutProtectedProjectsProjectsLayoutRoute,
   } as any)
 
-const LayoutProtectedProjectsLayoutTagsRoute =
-  LayoutProtectedProjectsLayoutTagsImport.update({
+const AppLayoutProtectedProjectsProjectsLayoutTagsRoute =
+  AppLayoutProtectedProjectsProjectsLayoutTagsImport.update({
     path: '/tags',
-    getParentRoute: () => LayoutProtectedProjectsLayoutRoute,
+    getParentRoute: () => AppLayoutProtectedProjectsProjectsLayoutRoute,
   } as any)
 
-const LayoutProtectedProjectsLayoutMapRoute =
-  LayoutProtectedProjectsLayoutMapImport.update({
+const AppLayoutProtectedProjectsProjectsLayoutMapRoute =
+  AppLayoutProtectedProjectsProjectsLayoutMapImport.update({
     path: '/map',
-    getParentRoute: () => LayoutProtectedProjectsLayoutRoute,
+    getParentRoute: () => AppLayoutProtectedProjectsProjectsLayoutRoute,
+  } as any)
+
+const AppLayoutProtectedProjectsProjectDetailsProjectIdRoute =
+  AppLayoutProtectedProjectsProjectDetailsProjectIdImport.update({
+    path: '/$projectId',
+    getParentRoute: () => AppLayoutProtectedProjectsProjectDetailsRoute,
   } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_layout': {
-      id: '/_layout'
+    '/_app-layout': {
+      id: '/_app-layout'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof LayoutImport
+      preLoaderRoute: typeof AppLayoutImport
       parentRoute: typeof rootRoute
     }
-    '/_layout/_protected': {
-      id: '/_layout/_protected'
+    '/_app-layout/_protected': {
+      id: '/_app-layout/_protected'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof LayoutProtectedImport
-      parentRoute: typeof LayoutImport
+      preLoaderRoute: typeof AppLayoutProtectedImport
+      parentRoute: typeof AppLayoutImport
     }
-    '/_layout/about': {
-      id: '/_layout/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof LayoutAboutImport
-      parentRoute: typeof LayoutImport
+    '/_app-layout/_public': {
+      id: '/_app-layout/_public'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AppLayoutPublicImport
+      parentRoute: typeof AppLayoutImport
     }
-    '/_layout/explore': {
-      id: '/_layout/explore'
-      path: '/explore'
-      fullPath: '/explore'
-      preLoaderRoute: typeof LayoutExploreImport
-      parentRoute: typeof LayoutImport
+    '/_app-layout/_protected/_account': {
+      id: '/_app-layout/_protected/_account'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AppLayoutProtectedAccountImport
+      parentRoute: typeof AppLayoutProtectedImport
     }
-    '/_layout/features': {
-      id: '/_layout/features'
-      path: '/features'
-      fullPath: '/features'
-      preLoaderRoute: typeof LayoutFeaturesImport
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/log-in': {
-      id: '/_layout/log-in'
-      path: '/log-in'
-      fullPath: '/log-in'
-      preLoaderRoute: typeof LayoutLogInImport
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/sign-up': {
-      id: '/_layout/sign-up'
-      path: '/sign-up'
-      fullPath: '/sign-up'
-      preLoaderRoute: typeof LayoutSignUpImport
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/': {
-      id: '/_layout/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof LayoutIndexImport
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/_protected/profile': {
-      id: '/_layout/_protected/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof LayoutProtectedProfileImport
-      parentRoute: typeof LayoutProtectedImport
-    }
-    '/_layout/_protected/projects': {
-      id: '/_layout/_protected/projects'
+    '/_app-layout/_protected/projects': {
+      id: '/_app-layout/_protected/projects'
       path: '/projects'
       fullPath: '/projects'
-      preLoaderRoute: typeof LayoutProtectedProjectsImport
-      parentRoute: typeof LayoutProtectedImport
+      preLoaderRoute: typeof AppLayoutProtectedProjectsImport
+      parentRoute: typeof AppLayoutProtectedImport
     }
-    '/_layout/_protected/settings': {
-      id: '/_layout/_protected/settings'
+    '/_app-layout/_public/about': {
+      id: '/_app-layout/_public/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AppLayoutPublicAboutImport
+      parentRoute: typeof AppLayoutPublicImport
+    }
+    '/_app-layout/_public/explore': {
+      id: '/_app-layout/_public/explore'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof AppLayoutPublicExploreImport
+      parentRoute: typeof AppLayoutPublicImport
+    }
+    '/_app-layout/_public/features': {
+      id: '/_app-layout/_public/features'
+      path: '/features'
+      fullPath: '/features'
+      preLoaderRoute: typeof AppLayoutPublicFeaturesImport
+      parentRoute: typeof AppLayoutPublicImport
+    }
+    '/_app-layout/_public/log-in': {
+      id: '/_app-layout/_public/log-in'
+      path: '/log-in'
+      fullPath: '/log-in'
+      preLoaderRoute: typeof AppLayoutPublicLogInImport
+      parentRoute: typeof AppLayoutPublicImport
+    }
+    '/_app-layout/_public/sign-up': {
+      id: '/_app-layout/_public/sign-up'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof AppLayoutPublicSignUpImport
+      parentRoute: typeof AppLayoutPublicImport
+    }
+    '/_app-layout/_public/': {
+      id: '/_app-layout/_public/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof AppLayoutPublicIndexImport
+      parentRoute: typeof AppLayoutPublicImport
+    }
+    '/_app-layout/_protected/_account/profile': {
+      id: '/_app-layout/_protected/_account/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AppLayoutProtectedAccountProfileImport
+      parentRoute: typeof AppLayoutProtectedAccountImport
+    }
+    '/_app-layout/_protected/_account/settings': {
+      id: '/_app-layout/_protected/_account/settings'
       path: '/settings'
       fullPath: '/settings'
-      preLoaderRoute: typeof LayoutProtectedSettingsImport
-      parentRoute: typeof LayoutProtectedImport
+      preLoaderRoute: typeof AppLayoutProtectedAccountSettingsImport
+      parentRoute: typeof AppLayoutProtectedAccountImport
     }
-    '/_layout/_protected/projects/$projectId': {
-      id: '/_layout/_protected/projects/$projectId'
-      path: '/$projectId'
-      fullPath: '/projects/$projectId'
-      preLoaderRoute: typeof LayoutProtectedProjectsProjectIdImport
-      parentRoute: typeof LayoutProtectedProjectsImport
-    }
-    '/_layout/_protected/projects/_layout': {
-      id: '/_layout/_protected/projects/_layout'
+    '/_app-layout/_protected/projects/_project-details': {
+      id: '/_app-layout/_protected/projects/_project-details'
       path: ''
       fullPath: '/projects'
-      preLoaderRoute: typeof LayoutProtectedProjectsLayoutImport
-      parentRoute: typeof LayoutProtectedProjectsImport
+      preLoaderRoute: typeof AppLayoutProtectedProjectsProjectDetailsImport
+      parentRoute: typeof AppLayoutProtectedProjectsImport
     }
-    '/_layout/_protected/projects/_layout/map': {
-      id: '/_layout/_protected/projects/_layout/map'
+    '/_app-layout/_protected/projects/_projects-layout': {
+      id: '/_app-layout/_protected/projects/_projects-layout'
+      path: ''
+      fullPath: '/projects'
+      preLoaderRoute: typeof AppLayoutProtectedProjectsProjectsLayoutImport
+      parentRoute: typeof AppLayoutProtectedProjectsImport
+    }
+    '/_app-layout/_protected/projects/_project-details/$projectId': {
+      id: '/_app-layout/_protected/projects/_project-details/$projectId'
+      path: '/$projectId'
+      fullPath: '/projects/$projectId'
+      preLoaderRoute: typeof AppLayoutProtectedProjectsProjectDetailsProjectIdImport
+      parentRoute: typeof AppLayoutProtectedProjectsProjectDetailsImport
+    }
+    '/_app-layout/_protected/projects/_projects-layout/map': {
+      id: '/_app-layout/_protected/projects/_projects-layout/map'
       path: '/map'
       fullPath: '/projects/map'
-      preLoaderRoute: typeof LayoutProtectedProjectsLayoutMapImport
-      parentRoute: typeof LayoutProtectedProjectsLayoutImport
+      preLoaderRoute: typeof AppLayoutProtectedProjectsProjectsLayoutMapImport
+      parentRoute: typeof AppLayoutProtectedProjectsProjectsLayoutImport
     }
-    '/_layout/_protected/projects/_layout/tags': {
-      id: '/_layout/_protected/projects/_layout/tags'
+    '/_app-layout/_protected/projects/_projects-layout/tags': {
+      id: '/_app-layout/_protected/projects/_projects-layout/tags'
       path: '/tags'
       fullPath: '/projects/tags'
-      preLoaderRoute: typeof LayoutProtectedProjectsLayoutTagsImport
-      parentRoute: typeof LayoutProtectedProjectsLayoutImport
+      preLoaderRoute: typeof AppLayoutProtectedProjectsProjectsLayoutTagsImport
+      parentRoute: typeof AppLayoutProtectedProjectsProjectsLayoutImport
     }
-    '/_layout/_protected/projects/_layout/timeline': {
-      id: '/_layout/_protected/projects/_layout/timeline'
+    '/_app-layout/_protected/projects/_projects-layout/timeline': {
+      id: '/_app-layout/_protected/projects/_projects-layout/timeline'
       path: '/timeline'
       fullPath: '/projects/timeline'
-      preLoaderRoute: typeof LayoutProtectedProjectsLayoutTimelineImport
-      parentRoute: typeof LayoutProtectedProjectsLayoutImport
+      preLoaderRoute: typeof AppLayoutProtectedProjectsProjectsLayoutTimelineImport
+      parentRoute: typeof AppLayoutProtectedProjectsProjectsLayoutImport
     }
-    '/_layout/_protected/projects/_layout/': {
-      id: '/_layout/_protected/projects/_layout/'
+    '/_app-layout/_protected/projects/_projects-layout/': {
+      id: '/_app-layout/_protected/projects/_projects-layout/'
       path: '/'
       fullPath: '/projects/'
-      preLoaderRoute: typeof LayoutProtectedProjectsLayoutIndexImport
-      parentRoute: typeof LayoutProtectedProjectsLayoutImport
+      preLoaderRoute: typeof AppLayoutProtectedProjectsProjectsLayoutIndexImport
+      parentRoute: typeof AppLayoutProtectedProjectsProjectsLayoutImport
     }
   }
 }
@@ -251,27 +295,36 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren({
-  LayoutRoute: LayoutRoute.addChildren({
-    LayoutProtectedRoute: LayoutProtectedRoute.addChildren({
-      LayoutProtectedProfileRoute,
-      LayoutProtectedProjectsRoute: LayoutProtectedProjectsRoute.addChildren({
-        LayoutProtectedProjectsProjectIdRoute,
-        LayoutProtectedProjectsLayoutRoute:
-          LayoutProtectedProjectsLayoutRoute.addChildren({
-            LayoutProtectedProjectsLayoutMapRoute,
-            LayoutProtectedProjectsLayoutTagsRoute,
-            LayoutProtectedProjectsLayoutTimelineRoute,
-            LayoutProtectedProjectsLayoutIndexRoute,
-          }),
-      }),
-      LayoutProtectedSettingsRoute,
+  AppLayoutRoute: AppLayoutRoute.addChildren({
+    AppLayoutProtectedRoute: AppLayoutProtectedRoute.addChildren({
+      AppLayoutProtectedAccountRoute:
+        AppLayoutProtectedAccountRoute.addChildren({
+          AppLayoutProtectedAccountProfileRoute,
+          AppLayoutProtectedAccountSettingsRoute,
+        }),
+      AppLayoutProtectedProjectsRoute:
+        AppLayoutProtectedProjectsRoute.addChildren({
+          AppLayoutProtectedProjectsProjectDetailsRoute:
+            AppLayoutProtectedProjectsProjectDetailsRoute.addChildren({
+              AppLayoutProtectedProjectsProjectDetailsProjectIdRoute,
+            }),
+          AppLayoutProtectedProjectsProjectsLayoutRoute:
+            AppLayoutProtectedProjectsProjectsLayoutRoute.addChildren({
+              AppLayoutProtectedProjectsProjectsLayoutMapRoute,
+              AppLayoutProtectedProjectsProjectsLayoutTagsRoute,
+              AppLayoutProtectedProjectsProjectsLayoutTimelineRoute,
+              AppLayoutProtectedProjectsProjectsLayoutIndexRoute,
+            }),
+        }),
     }),
-    LayoutAboutRoute,
-    LayoutExploreRoute,
-    LayoutFeaturesRoute,
-    LayoutLogInRoute,
-    LayoutSignUpRoute,
-    LayoutIndexRoute,
+    AppLayoutPublicRoute: AppLayoutPublicRoute.addChildren({
+      AppLayoutPublicAboutRoute,
+      AppLayoutPublicExploreRoute,
+      AppLayoutPublicFeaturesRoute,
+      AppLayoutPublicLogInRoute,
+      AppLayoutPublicSignUpRoute,
+      AppLayoutPublicIndexRoute,
+    }),
   }),
 })
 
@@ -283,99 +336,120 @@ export const routeTree = rootRoute.addChildren({
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/_layout"
+        "/_app-layout"
       ]
     },
-    "/_layout": {
-      "filePath": "_layout.tsx",
+    "/_app-layout": {
+      "filePath": "_app-layout.tsx",
       "children": [
-        "/_layout/_protected",
-        "/_layout/about",
-        "/_layout/explore",
-        "/_layout/features",
-        "/_layout/log-in",
-        "/_layout/sign-up",
-        "/_layout/"
+        "/_app-layout/_protected",
+        "/_app-layout/_public"
       ]
     },
-    "/_layout/_protected": {
-      "filePath": "_layout/_protected.tsx",
-      "parent": "/_layout",
+    "/_app-layout/_protected": {
+      "filePath": "_app-layout/_protected.tsx",
+      "parent": "/_app-layout",
       "children": [
-        "/_layout/_protected/profile",
-        "/_layout/_protected/projects",
-        "/_layout/_protected/settings"
+        "/_app-layout/_protected/_account",
+        "/_app-layout/_protected/projects"
       ]
     },
-    "/_layout/about": {
-      "filePath": "_layout/about.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/explore": {
-      "filePath": "_layout/explore.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/features": {
-      "filePath": "_layout/features.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/log-in": {
-      "filePath": "_layout/log-in.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/sign-up": {
-      "filePath": "_layout/sign-up.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/": {
-      "filePath": "_layout/index.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/_protected/profile": {
-      "filePath": "_layout/_protected/profile.tsx",
-      "parent": "/_layout/_protected"
-    },
-    "/_layout/_protected/projects": {
-      "filePath": "_layout/_protected/projects.tsx",
-      "parent": "/_layout/_protected",
+    "/_app-layout/_public": {
+      "filePath": "_app-layout/_public.tsx",
+      "parent": "/_app-layout",
       "children": [
-        "/_layout/_protected/projects/$projectId",
-        "/_layout/_protected/projects/_layout"
+        "/_app-layout/_public/about",
+        "/_app-layout/_public/explore",
+        "/_app-layout/_public/features",
+        "/_app-layout/_public/log-in",
+        "/_app-layout/_public/sign-up",
+        "/_app-layout/_public/"
       ]
     },
-    "/_layout/_protected/settings": {
-      "filePath": "_layout/_protected/settings.tsx",
-      "parent": "/_layout/_protected"
-    },
-    "/_layout/_protected/projects/$projectId": {
-      "filePath": "_layout/_protected/projects/$projectId.tsx",
-      "parent": "/_layout/_protected/projects"
-    },
-    "/_layout/_protected/projects/_layout": {
-      "filePath": "_layout/_protected/projects/_layout.tsx",
-      "parent": "/_layout/_protected/projects",
+    "/_app-layout/_protected/_account": {
+      "filePath": "_app-layout/_protected/_account.tsx",
+      "parent": "/_app-layout/_protected",
       "children": [
-        "/_layout/_protected/projects/_layout/map",
-        "/_layout/_protected/projects/_layout/tags",
-        "/_layout/_protected/projects/_layout/timeline",
-        "/_layout/_protected/projects/_layout/"
+        "/_app-layout/_protected/_account/profile",
+        "/_app-layout/_protected/_account/settings"
       ]
     },
-    "/_layout/_protected/projects/_layout/map": {
-      "filePath": "_layout/_protected/projects/_layout/map.tsx",
-      "parent": "/_layout/_protected/projects/_layout"
+    "/_app-layout/_protected/projects": {
+      "filePath": "_app-layout/_protected/projects.tsx",
+      "parent": "/_app-layout/_protected",
+      "children": [
+        "/_app-layout/_protected/projects/_project-details",
+        "/_app-layout/_protected/projects/_projects-layout"
+      ]
     },
-    "/_layout/_protected/projects/_layout/tags": {
-      "filePath": "_layout/_protected/projects/_layout/tags.tsx",
-      "parent": "/_layout/_protected/projects/_layout"
+    "/_app-layout/_public/about": {
+      "filePath": "_app-layout/_public/about.tsx",
+      "parent": "/_app-layout/_public"
     },
-    "/_layout/_protected/projects/_layout/timeline": {
-      "filePath": "_layout/_protected/projects/_layout/timeline.tsx",
-      "parent": "/_layout/_protected/projects/_layout"
+    "/_app-layout/_public/explore": {
+      "filePath": "_app-layout/_public/explore.tsx",
+      "parent": "/_app-layout/_public"
     },
-    "/_layout/_protected/projects/_layout/": {
-      "filePath": "_layout/_protected/projects/_layout/index.tsx",
-      "parent": "/_layout/_protected/projects/_layout"
+    "/_app-layout/_public/features": {
+      "filePath": "_app-layout/_public/features.tsx",
+      "parent": "/_app-layout/_public"
+    },
+    "/_app-layout/_public/log-in": {
+      "filePath": "_app-layout/_public/log-in.tsx",
+      "parent": "/_app-layout/_public"
+    },
+    "/_app-layout/_public/sign-up": {
+      "filePath": "_app-layout/_public/sign-up.tsx",
+      "parent": "/_app-layout/_public"
+    },
+    "/_app-layout/_public/": {
+      "filePath": "_app-layout/_public/index.tsx",
+      "parent": "/_app-layout/_public"
+    },
+    "/_app-layout/_protected/_account/profile": {
+      "filePath": "_app-layout/_protected/_account/profile.tsx",
+      "parent": "/_app-layout/_protected/_account"
+    },
+    "/_app-layout/_protected/_account/settings": {
+      "filePath": "_app-layout/_protected/_account/settings.tsx",
+      "parent": "/_app-layout/_protected/_account"
+    },
+    "/_app-layout/_protected/projects/_project-details": {
+      "filePath": "_app-layout/_protected/projects/_project-details.tsx",
+      "parent": "/_app-layout/_protected/projects",
+      "children": [
+        "/_app-layout/_protected/projects/_project-details/$projectId"
+      ]
+    },
+    "/_app-layout/_protected/projects/_projects-layout": {
+      "filePath": "_app-layout/_protected/projects/_projects-layout.tsx",
+      "parent": "/_app-layout/_protected/projects",
+      "children": [
+        "/_app-layout/_protected/projects/_projects-layout/map",
+        "/_app-layout/_protected/projects/_projects-layout/tags",
+        "/_app-layout/_protected/projects/_projects-layout/timeline",
+        "/_app-layout/_protected/projects/_projects-layout/"
+      ]
+    },
+    "/_app-layout/_protected/projects/_project-details/$projectId": {
+      "filePath": "_app-layout/_protected/projects/_project-details/$projectId.tsx",
+      "parent": "/_app-layout/_protected/projects/_project-details"
+    },
+    "/_app-layout/_protected/projects/_projects-layout/map": {
+      "filePath": "_app-layout/_protected/projects/_projects-layout/map.tsx",
+      "parent": "/_app-layout/_protected/projects/_projects-layout"
+    },
+    "/_app-layout/_protected/projects/_projects-layout/tags": {
+      "filePath": "_app-layout/_protected/projects/_projects-layout/tags.tsx",
+      "parent": "/_app-layout/_protected/projects/_projects-layout"
+    },
+    "/_app-layout/_protected/projects/_projects-layout/timeline": {
+      "filePath": "_app-layout/_protected/projects/_projects-layout/timeline.tsx",
+      "parent": "/_app-layout/_protected/projects/_projects-layout"
+    },
+    "/_app-layout/_protected/projects/_projects-layout/": {
+      "filePath": "_app-layout/_protected/projects/_projects-layout/index.tsx",
+      "parent": "/_app-layout/_protected/projects/_projects-layout"
     }
   }
 }
