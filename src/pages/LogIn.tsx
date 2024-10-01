@@ -1,5 +1,6 @@
 import { useRouter } from '@tanstack/react-router';
 import { AuthForm } from '../components/app/AuthForm';
+import { FieldWrapper } from '../components/app/FieldWrapper';
 import { Input } from '../components/forms/Input';
 import { Password } from '../components/forms/Password';
 import { Button } from '../components/ui/Button';
@@ -31,21 +32,25 @@ export const LogIn = () => {
       onSubmit={onSubmit}
     >
       <div className="flex flex-col gap-8">
-        <Input
-          type="email"
-          id="email"
-          label="Email"
-          autoComplete="email"
-          isRequired
-          config={configInput}
-        />
-        <Password
-          id="password"
-          label="Password"
-          autoComplete="current-password"
-          isRequired
-          config={configInput}
-        />
+        <FieldWrapper>
+          <Input
+            type="email"
+            id="email"
+            label="Email"
+            autoComplete="email"
+            isRequired
+            config={configInput}
+          />
+        </FieldWrapper>
+        <FieldWrapper>
+          <Password
+            id="password"
+            label="Password"
+            autoComplete="current-password"
+            isRequired
+            config={configInput}
+          />
+        </FieldWrapper>
       </div>
       <Button disabled={logInMutation.isPending} className="mx-auto">
         Log in

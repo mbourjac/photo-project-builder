@@ -53,14 +53,16 @@ export const Field = <
   };
 
   return (
-    <div className="flex w-full flex-col gap-1 text-sm">
+    <>
       <Label label={label} htmlFor={id} isInputRequired={isRequired} />
-      {renderInput(
-        inputAttributes as HTMLAttributes<U> & ReturnType<UseFormRegister<T>>,
-      )}
-      {errorMessage && (
-        <ErrorMessage id={errorMessageId} message={errorMessage} />
-      )}
-    </div>
+      <div className="flex flex-col gap-1">
+        {renderInput(
+          inputAttributes as HTMLAttributes<U> & ReturnType<UseFormRegister<T>>,
+        )}
+        {errorMessage && (
+          <ErrorMessage id={errorMessageId} message={errorMessage} />
+        )}
+      </div>
+    </>
   );
 };

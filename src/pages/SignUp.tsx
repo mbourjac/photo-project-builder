@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from '@tanstack/react-router';
 import { AuthForm } from '../components/app/AuthForm';
+import { FieldWrapper } from '../components/app/FieldWrapper';
 import { Input } from '../components/forms/Input';
 import { Password } from '../components/forms/Password';
 import { Button } from '../components/ui/Button';
@@ -65,23 +66,27 @@ export const SignUp = () => {
         {currentStep === 'information' && (
           <>
             <div className="flex flex-col gap-8">
-              <Input
-                type="email"
-                id="email"
-                label="Email"
-                autoComplete="email"
-                isRequired
-                onKeyDown={handleKeyDown}
-                config={configInput}
-              />
-              <Input
-                id="username"
-                label="Username"
-                autoComplete="given-name"
-                isRequired
-                onKeyDown={handleKeyDown}
-                config={configInput}
-              />
+              <FieldWrapper>
+                <Input
+                  type="email"
+                  id="email"
+                  label="Email"
+                  autoComplete="email"
+                  isRequired
+                  onKeyDown={handleKeyDown}
+                  config={configInput}
+                />
+              </FieldWrapper>
+              <FieldWrapper>
+                <Input
+                  id="username"
+                  label="Username"
+                  autoComplete="given-name"
+                  isRequired
+                  onKeyDown={handleKeyDown}
+                  config={configInput}
+                />
+              </FieldWrapper>
             </div>
             <Button
               type="button"
@@ -95,20 +100,24 @@ export const SignUp = () => {
         {currentStep === 'password' && (
           <>
             <div className="flex flex-col gap-8">
-              <Password
-                id="password"
-                label="Password"
-                autoComplete="new-password"
-                isRequired
-                config={configInput}
-              />
-              <Password
-                id="confirmPassword"
-                label="Confirm password"
-                autoComplete="new-password"
-                isRequired
-                config={configInput}
-              />
+              <FieldWrapper>
+                <Password
+                  id="password"
+                  label="Password"
+                  autoComplete="new-password"
+                  isRequired
+                  config={configInput}
+                />
+              </FieldWrapper>
+              <FieldWrapper>
+                <Password
+                  id="confirmPassword"
+                  label="Confirm password"
+                  autoComplete="new-password"
+                  isRequired
+                  config={configInput}
+                />
+              </FieldWrapper>
             </div>
             <Button
               type="submit"
