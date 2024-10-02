@@ -1,8 +1,17 @@
-import { queryOptions } from '@tanstack/react-query';
-import { getAllProjectsRequest } from './projects.api';
-import { allProjectsSchema } from './projects.schemas';
+import {
+  queryOptions,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+import { getErrorMessage } from '../../helpers/errors';
+import { createProjectRequest, getAllProjectsRequest } from './projects.api';
+import { allProjectsSchema, projectSchema } from './projects.schemas';
+import type { CreateProject } from './projects.types';
 
 export const useProjectsService = () => {
+  const queryClient = useQueryClient();
+
   const getAllProjectsQueryOptions = () =>
     queryOptions({
       queryKey: ['projects'],
@@ -12,5 +21,22 @@ export const useProjectsService = () => {
       },
     });
 
-  return { getAllProjectsQueryOptions };
+  const createProjectMutation = useMutation({
+    mutationKey: ['projects'],
+    mutationFn: async (createProjectData: CreateProject) => {
+      const project = await createProjectRequest(createProjectData);
+      return projectSchema.parse(project);
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['projects'] });
+    },
+    onError: (error) => {
+      toast.error(getErrorMessage(error));
+    },
+  });
+
+  return {
+    getAllProjectsQueryOptions,
+    createProjectMutation,
+  };
 };

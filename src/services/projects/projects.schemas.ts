@@ -1,5 +1,10 @@
 import { z } from 'zod';
 
+export const createProjectSchema = z.object({
+  title: z.string().trim().min(1, { message: 'Enter a title' }),
+  description: z.string().optional(),
+});
+
 export const projectSchema = z.object({
   id: z.string(),
   title: z.string(),
