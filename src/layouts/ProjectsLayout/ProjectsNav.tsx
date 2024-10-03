@@ -1,7 +1,6 @@
-import { Link } from '@tanstack/react-router';
-import { Icon } from '../../components/ui/Icon';
 import { Separator } from '../../components/ui/Separator';
 import { NewProjectModal } from './NewProjectModal';
+import { ProjectsNavLink } from './ProjectsNavLink';
 
 export const ProjectsNav = () => {
   return (
@@ -9,27 +8,15 @@ export const ProjectsNav = () => {
       <NewProjectModal />
       <Separator />
       <nav aria-label="Projects" className="flex flex-col">
-        <Link
-          to="/projects/timeline"
-          className="flex w-full items-center gap-2 rounded-xl p-2 text-left hover:bg-zinc-100 focus:bg-zinc-100"
-        >
-          <Icon kind="calendar" aria-hidden="true" className="size-5" />
-          <span>Timeline</span>
-        </Link>
-        <Link
-          to="/projects/tags"
-          className="flex w-full items-center gap-2 rounded-xl p-2 text-left hover:bg-zinc-100 focus:bg-zinc-100"
-        >
-          <Icon kind="tag" aria-hidden="true" className="size-5" />
-          <span>Tags</span>
-        </Link>
-        <Link
-          to="/projects/map"
-          className="flex w-full items-center gap-2 rounded-xl p-2 text-left hover:bg-zinc-100 focus:bg-zinc-100"
-        >
-          <Icon kind="pin" aria-hidden="true" className="size-5" />
-          <span>Map</span>
-        </Link>
+        <ProjectsNavLink to="/projects/timeline" iconKind="calendar">
+          Timeline
+        </ProjectsNavLink>
+        <ProjectsNavLink to="/projects/tags" iconKind="tag">
+          Tags
+        </ProjectsNavLink>
+        <ProjectsNavLink to="/projects/map" iconKind="pin">
+          Map
+        </ProjectsNavLink>
       </nav>
       <Separator />
     </section>
