@@ -4,7 +4,7 @@ import { ProjectCard } from './ProjectCard';
 
 export const Projects = () => {
   const getAllProjectsQuery = useRouteContext({
-    from: '/_app-layout/_protected/projects',
+    from: '/_app-layout/_protected/projects/_projects-dashboard/_layout/',
     select: (context) => context.getAllProjectsQuery,
   });
   const { data: projects } = useSuspenseQuery(getAllProjectsQuery);
