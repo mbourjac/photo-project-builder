@@ -5,7 +5,11 @@ import {
 } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { getErrorMessage } from '../../helpers/errors';
-import { createProjectRequest, getAllProjectsRequest } from './projects.api';
+import {
+  createProjectRequest,
+  getAllProjectsRequest,
+  getProjectRequest,
+} from './projects.api';
 import { allProjectsSchema, projectSchema } from './projects.schemas';
 import type { CreateProject } from './projects.types';
 
@@ -18,6 +22,15 @@ export const useProjectsService = () => {
       queryFn: async () => {
         const projects = await getAllProjectsRequest();
         return allProjectsSchema.parse(projects);
+      },
+    });
+
+  const getProjectQueryOptions = (projectId: string) =>
+    queryOptions({
+      queryKey: ['projects', { projectId }],
+      queryFn: async () => {
+        const project = await getProjectRequest(projectId);
+        return projectSchema.parse(project);
       },
     });
 
@@ -37,6 +50,7 @@ export const useProjectsService = () => {
 
   return {
     getAllProjectsQueryOptions,
+    getProjectQueryOptions,
     createProjectMutation,
   };
 };

@@ -5,17 +5,19 @@ export const createProjectSchema = z.object({
   description: z.string().optional(),
 });
 
+export const projectPictureSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  path: z.string(),
+});
+
 export const projectSchema = z.object({
   id: z.string(),
   title: z.string(),
   description: z.string().nullable(),
   isPublic: z.boolean(),
   tags: z.array(z.string()),
-  pictures: z.array(
-    z.object({
-      path: z.string(),
-    }),
-  ),
+  pictures: z.array(projectPictureSchema),
 });
 
 export const allProjectsSchema = z.array(projectSchema);

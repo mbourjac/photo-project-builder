@@ -4,8 +4,11 @@ import type { CreateProject } from './projects.types';
 
 export const getAllProjectsRequest = async () => {
   const { data } = await baseAPI.get<AxiosResponse>(`/projects`);
-  console.log(data);
+  return data;
+};
 
+export const getProjectRequest = async (projectId: string) => {
+  const { data } = await baseAPI.get<AxiosResponse>(`/projects/${projectId}`);
   return data;
 };
 
