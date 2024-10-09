@@ -1,10 +1,5 @@
 import { z } from 'zod';
 
-export const createProjectSchema = z.object({
-  title: z.string().trim().min(1, { message: 'Enter a title' }),
-  description: z.string().optional(),
-});
-
 export const projectPictureSchema = z.object({
   id: z.string(),
   title: z.string(),
@@ -21,3 +16,10 @@ export const projectSchema = z.object({
 });
 
 export const allProjectsSchema = z.array(projectSchema);
+
+export const createProjectSchema = z.object({
+  title: z.string().trim().min(1, { message: 'Enter a title' }),
+  description: z.string().optional(),
+});
+
+export const updateProjectInfoSchema = createProjectSchema;
