@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { useRouteContext } from '@tanstack/react-router';
 import { FieldWrapper } from '../../components/app/FieldWrapper';
@@ -45,6 +46,14 @@ export const ProjectDetails = () => {
   };
 
   const isEditButtonDisabled = !isFormDirty || updateProjectMutation.isPending;
+
+  // Reset the form when the query data changes
+  useEffect(() => {
+    resetForm({
+      title,
+      description: description ?? undefined,
+    });
+  }, [title, description, resetForm]);
 
   return (
     <div className="flex w-full gap-8">
