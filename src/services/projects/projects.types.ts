@@ -17,6 +17,6 @@ export type UpdateProjectInfo = z.infer<typeof updateProjectInfoSchema>;
 export type UpdateProject = {
   projectId: string;
   projectInfo: UpdateProjectInfo;
-  projectPictures?: File[];
+  projectPictures: File[];
   projectTags?: string[];
 };

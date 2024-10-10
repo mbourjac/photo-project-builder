@@ -26,7 +26,7 @@ export const createProjectRequest = async (
 export const updateProjectRequest = async ({
   projectId,
   projectInfo,
-  projectPictures = [],
+  projectPictures,
   projectTags = [],
 }: UpdateProject) => {
   const formData = new FormData();

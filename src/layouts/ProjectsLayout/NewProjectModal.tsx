@@ -56,14 +56,14 @@ export const NewProjectModal = () => {
         <Icon kind="plus" aria-hidden="true" className="size-5" />
         <span>New project</span>
       </ModalButton>
-      <ModalContent ariaLabelledby="modal-heading">
+      <ModalContent ariaLabelledby="modal-title">
         <div className="pt-10">
           <button
             onClick={handleCloseModal}
             className="absolute right-6 top-6 z-10 flex size-8 items-center justify-center rounded-full bg-black hover:opacity-80"
           >
             <Icon
-              kind="close"
+              kind="x"
               screenReaderLabel="Close modal"
               className="text-white"
             />
@@ -71,7 +71,7 @@ export const NewProjectModal = () => {
           <div className="h-full overflow-auto">
             <div className="flex flex-col gap-12">
               <div className="flex flex-col gap-2">
-                <h2 id="modal-heading" className="text-xl font-bold">
+                <h2 id="modal-title" className="text-xl font-bold">
                   Create a new project
                 </h2>
                 <p className="text-zinc-600">

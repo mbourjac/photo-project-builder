@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { useRouteContext } from '@tanstack/react-router';
 import { FieldWrapper } from '../../components/app/FieldWrapper';
@@ -10,6 +10,11 @@ import { router } from '../../router/router.instance';
 import { updateProjectInfoSchema } from '../../services/projects/projects.schemas';
 import { useProjectsService } from '../../services/projects/projects.service';
 import type { UpdateProjectInfo } from '../../services/projects/projects.types';
+import { DropzoneGallery } from './DropzoneGallery';
+
+export interface SelectedPicture extends File {
+  preview: string;
+}
 
 export const ProjectDetails = () => {
   const { updateProjectMutation } = useProjectsService();
@@ -20,6 +25,10 @@ export const ProjectDetails = () => {
   const {
     data: { id, title, description, pictures },
   } = useSuspenseQuery(getProjectQuery);
+
+  const [selectedPictures, setSelectedPictures] = useState<SelectedPicture[]>(
+    [],
+  );
 
   const {
     handleSubmit,
@@ -37,15 +46,34 @@ export const ProjectDetails = () => {
     updateProjectMutation.mutate({
       projectId: id,
       projectInfo: data,
+      projectPictures: selectedPictures,
     });
+    setSelectedPictures([]);
     await router.invalidate();
   };
 
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      const selectedPictures = acceptedFiles.map((file) =>
+        Object.assign(file, { preview: URL.createObjectURL(file) }),
+      );
+
+      setSelectedPictures((prevSelectedPictures) => [
+        ...prevSelectedPictures,
+        ...selectedPictures,
+      ]);
+    },
+    [setSelectedPictures],
+  );
+
   const handleCancelChanges = () => {
     resetForm();
+    setSelectedPictures([]);
   };
 
-  const isEditButtonDisabled = !isFormDirty || updateProjectMutation.isPending;
+  const isEditButtonDisabled =
+    (!isFormDirty && selectedPictures.length === 0) ||
+    updateProjectMutation.isPending;
 
   // Reset the form when the query data changes
   useEffect(() => {
@@ -94,15 +122,19 @@ export const ProjectDetails = () => {
           </button>
         </div>
       </form>
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(10rem,1fr))] gap-4">
+      <DropzoneGallery
+        selectedPictures={selectedPictures}
+        setSelectedPictures={setSelectedPictures}
+        onDrop={onDrop}
+      >
         {pictures.length > 0 &&
-          pictures.map(({ path, title }, index) => (
-            <div key={index}>
+          pictures.map(({ id, path, title }) => (
+            <div key={id}>
               {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
               <img src={path} alt={title} className="rounded-md object-cover" />
             </div>
           ))}
-      </div>
+      </DropzoneGallery>
     </div>
   );
 };

@@ -9,9 +9,10 @@ import {
   createProjectRequest,
   getAllProjectsRequest,
   getProjectRequest,
+  updateProjectRequest,
 } from './projects.api';
 import { allProjectsSchema, projectSchema } from './projects.schemas';
-import type { CreateProject } from './projects.types';
+import type { CreateProject, UpdateProject } from './projects.types';
 
 export const useProjectsService = () => {
   const queryClient = useQueryClient();
@@ -48,9 +49,23 @@ export const useProjectsService = () => {
     },
   });
 
+  const updateProjectMutation = useMutation({
+    mutationFn: async (updateProjectData: UpdateProject) => {
+      await updateProjectRequest(updateProjectData);
+    },
+    onSuccess: async () => {
+      toast('Your project has been updated.');
+      await queryClient.invalidateQueries({ queryKey: ['projects'] });
+    },
+    onError: (error) => {
+      toast.success(getErrorMessage(error));
+    },
+  });
+
   return {
     getAllProjectsQueryOptions,
     getProjectQueryOptions,
     createProjectMutation,
+    updateProjectMutation,
   };
 };
