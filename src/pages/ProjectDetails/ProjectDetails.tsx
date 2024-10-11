@@ -5,12 +5,14 @@ import { FieldWrapper } from '../../components/app/FieldWrapper';
 import { Input } from '../../components/forms/Input';
 import { TextArea } from '../../components/forms/TextArea';
 import { Separator } from '../../components/ui/Separator';
+import { arraysAreEqual } from '../../helpers/arrays';
 import { useZodForm } from '../../hooks/use-zod-form';
 import { router } from '../../router/router.instance';
 import { updateProjectInfoSchema } from '../../services/projects/projects.schemas';
 import { useProjectsService } from '../../services/projects/projects.service';
 import type { UpdateProjectInfo } from '../../services/projects/projects.types';
 import { DropzoneGallery } from './DropzoneGallery';
+import { ProjectTagsInput } from './ProjectTagsInput';
 
 export interface SelectedPicture extends File {
   preview: string;
@@ -23,9 +25,12 @@ export const ProjectDetails = () => {
     select: (context) => context.getProjectQuery,
   });
   const {
-    data: { id, title, description, pictures },
+    data: { id, title, description, pictures, tags },
   } = useSuspenseQuery(getProjectQuery);
 
+  const initialTags = tags.map(({ name }) => name);
+
+  const [updatedTags, setUpdatedTags] = useState<string[]>(initialTags);
   const [selectedPictures, setSelectedPictures] = useState<SelectedPicture[]>(
     [],
   );
@@ -47,6 +52,7 @@ export const ProjectDetails = () => {
       projectId: id,
       projectInfo: data,
       projectPictures: selectedPictures,
+      projectTags: updatedTags,
     });
     setSelectedPictures([]);
     await router.invalidate();
@@ -69,10 +75,13 @@ export const ProjectDetails = () => {
   const handleCancelChanges = () => {
     resetForm();
     setSelectedPictures([]);
+    setUpdatedTags(initialTags);
   };
 
   const isEditButtonDisabled =
-    (!isFormDirty && selectedPictures.length === 0) ||
+    (!isFormDirty &&
+      selectedPictures.length === 0 &&
+      arraysAreEqual(updatedTags, initialTags)) ||
     updateProjectMutation.isPending;
 
   // Reset the form when the query data changes
@@ -102,6 +111,7 @@ export const ProjectDetails = () => {
                 rows={3}
               />
             </FieldWrapper>
+            <ProjectTagsInput tags={updatedTags} setTags={setUpdatedTags} />
           </div>
         </div>
         <Separator />

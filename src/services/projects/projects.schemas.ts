@@ -11,7 +11,12 @@ export const projectSchema = z.object({
   title: z.string(),
   description: z.string().nullable(),
   isPublic: z.boolean(),
-  tags: z.array(z.string()),
+  tags: z.array(
+    z.object({
+      id: z.string(),
+      name: z.string(),
+    }),
+  ),
   pictures: z.array(projectPictureSchema),
 });
 

@@ -18,5 +18,5 @@ export type UpdateProject = {
   projectId: string;
   projectInfo: UpdateProjectInfo;
   projectPictures: File[];
-  projectTags?: string[];
+  projectTags: string[];
 };
