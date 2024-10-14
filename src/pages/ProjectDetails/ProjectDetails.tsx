@@ -11,6 +11,7 @@ import { router } from '../../router/router.instance';
 import { updateProjectInfoSchema } from '../../services/projects/projects.schemas';
 import { useProjectsService } from '../../services/projects/projects.service';
 import type { UpdateProjectInfo } from '../../services/projects/projects.types';
+import { AddPicturesInput } from './AddPicturesInput';
 import { DropzoneGallery } from './DropzoneGallery';
 import { ProjectTagsInput } from './ProjectTagsInput';
 
@@ -98,6 +99,8 @@ export const ProjectDetails = () => {
         onSubmit={(event) => void handleSubmit(onSubmit)(event)}
         className="sticky top-[5.5rem] flex h-[calc(100vh-7.5rem)] w-80 shrink-0 flex-col text-pretty rounded-3xl border bg-white p-3"
       >
+        <AddPicturesInput onDrop={onDrop} />
+        <Separator />
         <div className="-mx-3 flex grow flex-col overflow-auto px-3">
           <div className="flex flex-col gap-4">
             <FieldWrapper>
