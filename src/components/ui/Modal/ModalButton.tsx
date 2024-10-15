@@ -12,7 +12,7 @@ export const ModalButton = ({ className, children }: ModalButtonProps) => {
   const { isOpen, setIsOpen } = useModalContext();
 
   const handleOpenModal = () => {
-    setIsOpen(true);
+    setIsOpen?.(true);
     isTouched.current = true;
   };
 
@@ -33,7 +33,12 @@ export const ModalButton = ({ className, children }: ModalButtonProps) => {
   }, [isOpen, isTouched]);
 
   return (
-    <button ref={openButtonRef} onClick={handleOpenModal} className={className}>
+    <button
+      type="button"
+      ref={openButtonRef}
+      onClick={handleOpenModal}
+      className={className}
+    >
       {children}
     </button>
   );

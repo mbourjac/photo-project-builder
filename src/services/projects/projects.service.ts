@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import { getErrorMessage } from '../../helpers/errors';
 import {
   createProjectRequest,
+  deleteProjectRequest,
   getAllProjectsRequest,
   getProjectRequest,
   updateProjectRequest,
@@ -62,10 +63,23 @@ export const useProjectsService = () => {
     },
   });
 
+  const deleteProjectMutation = useMutation({
+    mutationFn: async (projectId: string) => {
+      await deleteProjectRequest(projectId);
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['projects'] });
+    },
+    onError: (error) => {
+      toast.error(getErrorMessage(error));
+    },
+  });
+
   return {
     getAllProjectsQueryOptions,
     getProjectQueryOptions,
     createProjectMutation,
     updateProjectMutation,
+    deleteProjectMutation,
   };
 };

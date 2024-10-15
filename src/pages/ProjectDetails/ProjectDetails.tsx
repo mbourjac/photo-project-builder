@@ -12,6 +12,7 @@ import { updateProjectInfoSchema } from '../../services/projects/projects.schema
 import { useProjectsService } from '../../services/projects/projects.service';
 import type { UpdateProjectInfo } from '../../services/projects/projects.types';
 import { AddPicturesInput } from './AddPicturesInput';
+import { DeleteProjectModal } from './DeleteProjectModal';
 import { DropzoneGallery } from './DropzoneGallery';
 import { ProjectTagsInput } from './ProjectTagsInput';
 
@@ -118,21 +119,24 @@ export const ProjectDetails = () => {
           </div>
         </div>
         <Separator />
-        <div className="grid shrink-0 grid-cols-2 gap-2">
-          <button
-            type="button"
-            onClick={handleCancelChanges}
-            disabled={isEditButtonDisabled}
-            className="rounded-lg bg-black px-4 py-2.5 text-sm text-white transition-colors duration-150 disabled:opacity-50"
-          >
-            Cancel
-          </button>
-          <button
-            disabled={isEditButtonDisabled}
-            className="rounded-lg bg-black px-4 py-2.5 text-sm text-white transition-colors duration-150 disabled:opacity-50"
-          >
-            Save changes
-          </button>
+        <div className="flex flex-col gap-2">
+          <DeleteProjectModal projectId={id} />
+          <div className="grid shrink-0 grid-cols-2 gap-2">
+            <button
+              type="button"
+              onClick={handleCancelChanges}
+              disabled={isEditButtonDisabled}
+              className="rounded-lg bg-black px-4 py-2.5 text-sm text-white transition-colors duration-150 disabled:opacity-50"
+            >
+              Cancel
+            </button>
+            <button
+              disabled={isEditButtonDisabled}
+              className="rounded-lg bg-black px-4 py-2.5 text-sm text-white transition-colors duration-150 disabled:opacity-50"
+            >
+              Save changes
+            </button>
+          </div>
         </div>
       </form>
       <DropzoneGallery

@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 type ModalContextProps = {
   isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+  setIsOpen?: (isOpen: boolean) => void;
   handleCloseModal: () => void;
 };
 

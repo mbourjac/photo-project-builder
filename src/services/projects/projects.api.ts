@@ -55,3 +55,7 @@ export const updateProjectRequest = async ({
 
   return data;
 };
+
+export const deleteProjectRequest = async (projectId: string) => {
+  await baseAPI.delete<AxiosResponse>(`/projects/${projectId}`);
+};

@@ -3,7 +3,7 @@ import { ModalContext } from './ModalContext/ModalContext';
 
 type ModalProps = {
   isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+  setIsOpen?: (isOpen: boolean) => void;
   handleCloseModal: () => void;
   children: ReactNode;
 };
