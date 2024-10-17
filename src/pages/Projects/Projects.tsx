@@ -12,7 +12,7 @@ export const Projects = () => {
   const hasProjects = projects.length > 0;
 
   return (
-    <div className="grid h-fit grow grid-cols-[repeat(auto-fill,minmax(20rem,1fr))] gap-4 pb-8">
+    <div className="grid h-fit grow grid-cols-[repeat(auto-fill,minmax(16rem,1fr))] gap-4 pb-8">
       {hasProjects ?
         projects.map((project) => <ProjectCard key={project.id} {...project} />)
       : <p className="pt-4">You don&apos;t have any project yet.</p>}

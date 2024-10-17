@@ -32,7 +32,11 @@ export const AppLayout = () => {
             : <AuthNav />}
           </div>
         </header>
-        <Outlet />
+        <main className="flex grow px-8 pt-[5.5rem]">
+          <div className="flex grow pb-8">
+            <Outlet />
+          </div>
+        </main>
       </div>
     </>
   );
