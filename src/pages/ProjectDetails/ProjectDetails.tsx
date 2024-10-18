@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { useBlocker, useRouteContext } from '@tanstack/react-router';
 import { ConfirmModal } from '../../components/app/ConfirmModal';
@@ -38,16 +38,21 @@ export const ProjectDetails = () => {
     [],
   );
 
+  const formDefaultValues = useMemo(
+    () => ({
+      title,
+      description: description ?? undefined,
+    }),
+    [title, description],
+  );
+
   const {
     handleSubmit,
     configInput,
     formState: { isDirty: isFormDirty },
     reset: resetForm,
   } = useZodForm(updateProjectInfoSchema, {
-    defaultValues: {
-      title: title,
-      description: description ?? undefined,
-    },
+    defaultValues: formDefaultValues,
   });
 
   const onSubmit = async (data: UpdateProjectInfo) => {
@@ -101,11 +106,8 @@ export const ProjectDetails = () => {
 
   // Reset the form when the query data changes
   useEffect(() => {
-    resetForm({
-      title,
-      description: description ?? undefined,
-    });
-  }, [title, description, resetForm]);
+    resetForm(formDefaultValues);
+  }, [resetForm, formDefaultValues]);
 
   return (
     <>
